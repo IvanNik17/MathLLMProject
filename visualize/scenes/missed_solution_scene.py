@@ -8,7 +8,7 @@ sys.path.append(
 )
 
 from scenes.base_math_scene import BaseMathScene
-from manim_utils import (
+from visualize.manim_utils import (
     create_root_marker,
     create_explanation_text
 )

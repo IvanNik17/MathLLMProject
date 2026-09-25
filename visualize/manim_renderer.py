@@ -18,8 +18,8 @@ class ManimRenderer:
     def create_scene_file(self, scene_class, plan):
 
         template = "\n".join([
-            f"from scenes.{scene_class.__module__.split('.')[-1]} import {scene_class.__name__}",
-            "from explanation_plan import ExplanationPlan",
+            f"from visualize.scenes.{scene_class.__module__.split('.')[-1]} import {scene_class.__name__}",
+            "from core.explanation_plan import ExplanationPlan",
             "import numpy as np",
             "",
             f"{scene_class.__name__}.PLAN = ExplanationPlan(",

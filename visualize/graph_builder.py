@@ -1,7 +1,7 @@
 from manim import *
 import numpy as np
 
-from expression_evaluator import ExpressionEvaluator
+from math_helper.expression_evaluator import ExpressionEvaluator
 
 
 class GraphBuilder:

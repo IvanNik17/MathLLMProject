@@ -7,9 +7,9 @@ sys.path.append(
     str(Path(__file__).resolve().parent.parent)
 )
 
-from expression_evaluator import ExpressionEvaluator
+from math_helper.expression_evaluator import ExpressionEvaluator
 
-from manim_utils import (
+from visualize.manim_utils import (
     create_explanation_text,
     create_label_text
 )
@@ -24,14 +24,6 @@ class NoRealSolutionScene(BaseMathScene):
 
     def construct(self):
 
-        # plan = NoRealSolutionScene.PLAN
-
-
-        # if plan.explanation_type != "no_real_roots":
-        #     raise ValueError(
-        #         "QuadraticNoRealRoots requires no_real_roots plan"
-        #     )
-
 
         plan = self.get_plan()
 
@@ -41,14 +33,7 @@ class NoRealSolutionScene(BaseMathScene):
         )
 
 
-        # title = create_scene_title(
-        #     f"Solve: {plan.expression}=0"
-        # )
 
-
-        # self.play(
-        #     Write(title)
-        # )
 
         title, equation = self.create_header()
 
@@ -57,30 +42,6 @@ class NoRealSolutionScene(BaseMathScene):
             Write(equation)
         )
 
-
-        # axes = create_dynamic_axes(
-        #     plan.expression,
-        #     ExpressionEvaluator
-        # )
-
-
-        # axes.shift(
-        #     DOWN*0.5
-        # )
-
-
-        # graph = axes.plot(
-        #     lambda x:
-        #         ExpressionEvaluator.evaluate(
-        #             plan.expression,
-        #             x
-        #         ),
-        #     x_range=[
-        #         axes.x_min,
-        #         axes.x_max
-        #     ],
-        #     color=BLUE
-        # )
 
         axes, graph = self.create_graph()
 
@@ -177,23 +138,6 @@ class NoRealSolutionScene(BaseMathScene):
             Write(gap_text)
         )
 
-
-
-        # explanation = create_explanation_text(
-        #     "The parabola stays above the x-axis.\n"
-        #     "Therefore there are no real roots."
-        # )
-
-
-        # explanation.to_edge(
-        #     DOWN,
-        #     buff=0.3
-        # )
-
-
-        # self.play(
-        #     Write(explanation)
-        # )
 
 
         self.wait(3)

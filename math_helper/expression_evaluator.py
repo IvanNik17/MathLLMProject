@@ -1,20 +1,3 @@
-# import numpy as np
-
-
-# class ExpressionEvaluator:
-
-#     @staticmethod
-#     def evaluate(expression, x):
-
-#         return eval(
-#             expression,
-#             {
-#                 "__builtins__": {},
-#                 "x": x,
-#                 "np": np
-#             }
-#         )
-
 import numpy as np
 
 

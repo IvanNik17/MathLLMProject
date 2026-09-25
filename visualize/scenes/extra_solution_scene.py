@@ -8,7 +8,7 @@ sys.path.append(
 )
 
 from scenes.base_math_scene import BaseMathScene
-from manim_utils import create_explanation_text
+from visualize.manim_utils import create_explanation_text
 
 
 class ExtraSolutionScene(BaseMathScene):

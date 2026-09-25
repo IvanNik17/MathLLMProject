@@ -1,8 +1,8 @@
-from scenes.correct_answer_scene import CorrectAnswerScene
-from scenes.missed_solution_scene import MissedSolutionScene
-from scenes.wrong_solution_scene import WrongSolutionScene
-from scenes.extra_solution_scene import ExtraSolutionScene
-from scenes.no_real_solution_scene import NoRealSolutionScene
+from visualize.scenes.correct_answer_scene import CorrectAnswerScene
+from visualize.scenes.missed_solution_scene import MissedSolutionScene
+from visualize.scenes.wrong_solution_scene import WrongSolutionScene
+from visualize.scenes.extra_solution_scene import ExtraSolutionScene
+from visualize.scenes.no_real_solution_scene import NoRealSolutionScene
 
 class SceneFactory:
 

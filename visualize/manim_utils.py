@@ -2,7 +2,7 @@ from manim import *
 import numpy as np
 import textwrap
 
-from math_engine import MathEngine
+from math_helper.math_engine import MathEngine
 
 
 def create_dynamic_axes(

@@ -1,6 +1,6 @@
-from explanation_plan import ExplanationPlan
-from math_engine import MathEngine
-from expression_evaluator import ExpressionEvaluator
+from core.explanation_plan import ExplanationPlan
+from math_helper.math_engine import MathEngine
+from math_helper.expression_evaluator import ExpressionEvaluator
 
 
 def roots_match(
@@ -63,14 +63,6 @@ class MathProblemParser:
         ]
 
         extra_roots = wrong_roots
-
-        # correct_set = set(
-        #     correct_roots
-        # )
-
-        # student_set = set(
-        #     student_roots
-        # )
 
 
         wrong_points = [

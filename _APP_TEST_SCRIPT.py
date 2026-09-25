@@ -1,11 +1,11 @@
-from answer_parser import AnswerParser
-from math_problem_parser import MathProblemParser
-from manim_renderer import ManimRenderer
-from llm_explainer import LLMExplainer
+from math_helper.answer_parser import AnswerParser
+from math_helper.math_problem_parser import MathProblemParser
+from visualize.manim_renderer import ManimRenderer
+from llm.llm_explainer import LLMExplainer
 
-import math_problem_parser
+import math_helper.math_problem_parser
 
-print(math_problem_parser.__file__)
+print(math_helper.math_problem_parser.__file__)
 
 
 expression =  "x**2 + 4"

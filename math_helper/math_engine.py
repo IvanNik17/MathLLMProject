@@ -15,11 +15,6 @@ class MathEngine:
             equation,
             x
         )
-        # real and complex numbers returned
-        # return [
-        #         float(solution)
-        #         for solution in solutions
-        #     ]
 
 
         real_solutions = []
@@ -187,65 +182,6 @@ class MathEngine:
             (view_min, view_max)
         ]
     
-
-    # @staticmethod
-    # def get_sampling_interval(expression):
-
-    #     x = sp.symbols("x")
-
-    #     expr = sp.sympify(expression)
-
-    #     roots = MathEngine.solve_equation(expression)
-
-    #     domain = sp.calculus.util.continuous_domain(
-    #         expr,
-    #         x,
-    #         sp.S.Reals
-    #     )
-
-    #     # Default interval
-    #     x_min = -5
-    #     x_max = 5
-
-    #     # Expand around known roots
-    #     if roots:
-
-    #         x_min = min(x_min, min(roots) - 2)
-    #         x_max = max(x_max, max(roots) + 2)
-
-    #     # Respect function domain
-    #     if isinstance(domain, sp.Interval):
-
-    #         if domain.start.is_finite:
-    #             x_min = max(x_min, float(domain.start))
-
-    #         if domain.end.is_finite:
-    #             x_max = min(x_max, float(domain.end))
-
-    #     elif isinstance(domain, sp.Union):
-
-    #         intervals = list(domain.args)
-
-    #         starts = [
-    #             float(i.start)
-    #             for i in intervals
-    #             if i.start.is_finite
-    #         ]
-
-    #         ends = [
-    #             float(i.end)
-    #             for i in intervals
-    #             if i.end.is_finite
-    #         ]
-
-    #         if starts:
-    #             x_min = min(starts)
-
-    #         if ends:
-    #             x_max = max(ends)
-
-    #     return x_min, x_max
-
 
 if __name__ == "__main__":
 
