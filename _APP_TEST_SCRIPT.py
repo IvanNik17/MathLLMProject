@@ -15,7 +15,7 @@ student_answer = "I think the answer for x = 2"
 
 llm = LLMExplainer(
         base_url="https://app-mathllm.cloud.sdu.dk/api",
-        api_key="sk-335ecbf9d39940629b7884a4ade31a8e",
+        api_key="key_here",
         model="mistral:latest"
     )
 
