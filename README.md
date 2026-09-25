@@ -33,7 +33,7 @@ MathLLMProject/
 ├── _APP_TEST_SCRIPT.py
 ├── requirements.txt
 └── README.md
-```text
+```
 
 ## Installation
 
