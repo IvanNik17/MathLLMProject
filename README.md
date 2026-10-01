@@ -39,7 +39,7 @@ MathLLMProject/
 
 Create the Conda environment:
 
-    conda create -n MathLLM python=3.9
+    conda create -n MathLLM python=3.12
 
 Activate it:
 
