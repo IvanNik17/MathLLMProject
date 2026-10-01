@@ -117,7 +117,7 @@ if __name__ == "__main__":
 
     llm = LLMExplainer(
         base_url="https://app-mathllm.cloud.sdu.dk/api",
-        api_key="sk-335ecbf9d39940629b7884a4ade31a8e",
+        api_key="",
         model="mistral:latest"
     )
 
