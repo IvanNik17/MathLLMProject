@@ -8,7 +8,7 @@ MathLLMProject/
 ├── core/
 │   └── explanation_plan.py
 │
-├── mathematics/
+├── math_helper/
 │   ├── answer_parser.py
 │   ├── math_engine.py
 │   ├── math_problem_parser.py
@@ -17,7 +17,7 @@ MathLLMProject/
 ├── llm/
 │   └── llm_explainer.py
 │
-├── visualization/
+├── visualize/
 │   ├── manim_renderer.py
 │   ├── manim_utils.py
 │   ├── graph_builder.py
