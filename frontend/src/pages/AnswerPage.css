@@ -1,0 +1,66 @@
+.answer-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 70px 24px 120px; /* room for the header tab at the top and the steps bar at the bottom */
+}
+
+.answer-page__content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* --- The equation --- */
+
+.answer-page__instruction {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: var(--color-text-muted);
+}
+
+.answer-page__equation {
+  font-size: 64px;
+}
+
+/* --- Check answer --- */
+
+.answer-page__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.answer-page__hint {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.check-button {
+  height: 78px;
+  padding: 0 36px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-medium);
+  box-shadow: 0 0 24px var(--color-accent-glow);
+  transition: transform 0.1s, box-shadow 0.15s, opacity 0.15s;
+}
+
+.check-button:hover:not(:disabled) {
+  box-shadow: 0 0 36px var(--color-accent-glow);
+}
+
+.check-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.check-button:disabled {
+  opacity: 0.35;
+  box-shadow: none;
+}
+

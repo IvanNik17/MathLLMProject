@@ -1,0 +1,43 @@
+/* Base styles that apply to the whole page. Component styles live next to each component. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-ui);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  /* 30%-opacity radial gradient, layered on top of the flat background colour */
+  background-image: radial-gradient(
+    circle at center,
+    color-mix(in srgb, var(--color-background-glow) 30%, transparent),
+    color-mix(in srgb, var(--color-background) 30%, transparent)
+  );
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* A visible outline when navigating with the keyboard */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}

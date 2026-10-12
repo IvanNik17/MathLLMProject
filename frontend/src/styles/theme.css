@@ -1,0 +1,40 @@
+/*
+ * Design tokens: colours, radii and font used in the app
+ * Components refer to these with var(--name), so changing a value here changes it everywhere.
+ *
+ */
+
+:root {
+  /* Background */
+  --color-background: #0e1014;
+  --color-background-glow: #152332; /* centre of the radial gradient */
+
+  /* Accent */
+  --color-accent: #24e2ff;
+  --color-accent-glow: rgba(36, 226, 255, 0.35);
+  --color-accent-soft: rgba(36, 226, 255, 0.25);
+  --color-on-accent: #0e1014; /* text placed on top of the accent colour */
+
+  /* Text */
+  --color-text: #ffffff;
+  --color-text-muted: rgba(255, 255, 255, 0.7);
+  --color-text-faint: rgba(255, 255, 255, 0.45);
+
+  /* Surfaces (boxes layered on the background) */
+  --color-surface: rgba(255, 255, 255, 0.03);
+  --color-surface-raised: rgba(255, 255, 255, 0.05);
+  --color-surface-hover: rgba(255, 255, 255, 0.09);
+  --color-surface-sunken: rgba(0, 0, 0, 0.35);
+
+  /* Borders */
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.2);
+
+  /* Shapes */
+  --radius-small: 8px;
+  --radius-medium: 12px;
+  --radius-large: 16px;
+
+  /* Fonts */
+  --font-ui: 'DM Sans', system-ui, sans-serif;
+}
