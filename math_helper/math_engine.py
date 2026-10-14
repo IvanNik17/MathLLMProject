@@ -1,6 +1,6 @@
 import sympy as sp
 from sympy.calculus.util import continuous_domain
-
+from sympy.calculus.util import periodicity
 
 class MathEngine:
 
@@ -29,7 +29,33 @@ class MathEngine:
         return MathEngine.normalize_roots(
             real_solutions
         )
-    
+
+    # Solves periodic functions and returns their periodicity so all possible solutions can be generated
+    @staticmethod
+    def solve_periodic_equation(expression):
+        #Prepare equation and symbols - right now this is inefficient since it is also done under "#Get roots"
+        x = sp.symbols("x")
+        equation = sp.sympify(expression)
+
+        #Get roots
+        roots = MathEngine.solve_equation(expression)
+
+        # Calculate period
+        period = periodicity(equation, x)
+
+        return roots, period
+
+    @staticmethod
+    def convert_expression(expression):
+        return sp.sympify(expression)
+
+    @staticmethod
+    def expression_match(expression1, expression2):
+        equation1 = MathEngine.convert_expression(expression1)
+        equation2 = MathEngine.convert_expression(expression2)
+        if sp.simplify(equation1 - equation2) == 0:
+            return True
+        return False
 
     @staticmethod
     def normalize_roots(roots):

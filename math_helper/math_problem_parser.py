@@ -33,8 +33,6 @@ def roots_match(
 
         return True
 
-
-
 class MathProblemParser:
 
 
@@ -242,8 +240,105 @@ class MathProblemParser:
             extra_points=extra_points,
             explanation_text="A root is where y = 0."
         )
-    
 
+    @staticmethod
+    def parse_periodic_equation(expression, student_roots, student_period):
+        correct_roots, correct_period = MathEngine.solve_periodic_equation(expression)
 
+        if correct_period is None or correct_period == 0:
+            print("Error: equation is aperiodic!")
+            return None #TODO: Find out what to do in this case
+
+        complete_answers = [
+            f"{x} + {correct_period}"
+            for x in correct_roots
+        ]
+
+        complete_student_answers = [
+            f"{x} + {student_period}"
+            for x in student_roots
+        ]
+
+        #Wrong roots and points
+        wrong_roots = [
+            x
+            for x in student_roots
+            if not any(abs((abs(x) % round(correct_period, 2)) - r) < 0.01 for r in correct_roots)
+        ]
+        wrong_points = [
+            (
+                x,
+                ExpressionEvaluator.evaluate(
+                    expression,
+                    x
+                )
+            )
+            for x in wrong_roots
+        ]
+
+        missing_roots = [
+            x
+            for x in correct_roots
+            if not any(abs(x - s) < 0.01 for s in student_roots)
+        ]
+        missing_points = [
+            (x, 0)
+            for x in missing_roots
+        ]
+
+        extra_roots = wrong_roots
+        extra_points = [
+            (
+                x,
+                ExpressionEvaluator.evaluate(
+                    expression,
+                    x
+                )
+            )
+            for x in extra_roots
+        ]
+
+        # No real roots
+        if len(correct_period) == 0:
+            return ExplanationPlan(
+                explanation_type="no_real_roots",
+                expression=expression,
+                correct_points=[],
+                student_points=[(x, 0) for x in student_roots],
+                steps=[
+                    "show_graph",
+                    "show_no_intersections",
+                    "explain_no_real_roots"
+                ],
+                wrong_points=wrong_points,
+                missing_points=missing_points,
+                extra_points=extra_points,
+                explanation_text="The graph never crosses the x-axis."
+            )
+        # Correct answer
+
+        # Wrong period
+
+        # Extra root
+
+        # Missed root
+
+        # Wrong root
+        return ExplanationPlan(
+            explanation_type="wrong_root",
+            expression=expression,
+            correct_points=[(x, 0) for x in correct_roots],
+            student_points=[(x, 0) for x in student_roots],
+            steps=[
+                "show_graph",
+                "highlight_wrong_answer",
+                "evaluate_y_value",
+                "show_correct_root"
+            ],
+            wrong_points=wrong_points,
+            missing_points=missing_points,
+            extra_points=extra_points,
+            explanation_text="For periodic functions we want to find everytime y = 0 for the first period and the period length"
+        )
     
     
