@@ -67,7 +67,8 @@ class ExplanationPlan:
             "missed_root",
             "correct",
             "extra_root",
-            "no_real_roots"
+            "no_real_roots",
+            "wrong_period"
         ]
 
         if self.explanation_type not in valid_types:
