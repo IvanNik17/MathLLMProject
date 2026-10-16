@@ -93,7 +93,7 @@ Return ONLY the explanation text.
 
 if __name__ == "__main__":
 
-    from explanation_plan import ExplanationPlan
+    from core.explanation_plan import ExplanationPlan
 
 
     plan = ExplanationPlan(

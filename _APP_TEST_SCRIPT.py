@@ -2,6 +2,7 @@ from math_helper.answer_parser import AnswerParser
 from math_helper.math_problem_parser import MathProblemParser
 from visualize.manim_renderer import ManimRenderer
 from llm.llm_explainer import LLMExplainer
+import os
 
 import math_helper.math_problem_parser
 
@@ -15,7 +16,7 @@ student_answer = "I think the answer for x = 2"
 
 llm = LLMExplainer(
         base_url="https://app-mathllm.cloud.sdu.dk/api",
-        api_key="key_here",
+        api_key = os.environ["MATHLLM_API_KEY"],
         model="mistral:latest"
     )
 

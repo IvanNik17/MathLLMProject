@@ -1,10 +1,12 @@
 from openai import OpenAI
+import os
 
 # Configure the client to point to your university's Open WebUI instance
 client = OpenAI(
-    base_url="https://app-mathllm.cloud.sdu.dk/api",  # Must end in /api or /api/v1
-    api_key="",
+    base_url="https://app-mathllm.cloud.sdu.dk/api/v1",  # Must end in /api or /api/v1
+    api_key = os.environ["MATHLLM_API_KEY"]
 )
+
 
 # Send a prompt to a model
 response = client.chat.completions.create(
