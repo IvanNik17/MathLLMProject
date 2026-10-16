@@ -10,7 +10,8 @@ print(math_helper.math_problem_parser.__file__)
 
 
 expression = "x**2 + 4"
-student_answer = "x = 2"
+student_answer = "zero"
+# student_answer = "i think that the answer is x = +2 or even maybe -10 or something over x = --100 or +1"
 
 
 llm = LLMExplainer(
