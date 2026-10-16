@@ -9,9 +9,8 @@ import math_helper.math_problem_parser
 print(math_helper.math_problem_parser.__file__)
 
 
-expression =  "x**2 + 4"
-
-student_answer = "I think the answer for x = 2"
+expression = "x**2 + 4"
+student_answer = "x = 2"
 
 
 llm = LLMExplainer(
