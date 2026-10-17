@@ -1,23 +1,18 @@
-
 import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
+
   const [problems, setProblems] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
 
   const [answer, setAnswer] = useState("");
-
-
   const [result, setResult] = useState(null);
-
-
   const [submitting, setSubmitting] = useState(false);
-
-
   const [selectedProblemId, setSelectedProblemId] = useState("");
+
 
   useEffect(() => {
     async function loadProblems() {
@@ -90,7 +85,7 @@ function App() {
     <div className="app">
       <h1>MathWiz</h1>
 
-      <p>Your personal math visualizor.</p>
+      <p>Your personal math visualiser.</p>
 
       <h2>Available problems</h2>
 
@@ -168,10 +163,11 @@ function App() {
                   : "No numbers found"}
               </p>
 
+
               <video
                 controls
                 width="640"
-                src="/api/video">
+                src={result.video_url}>
                 Your browser does not support video playback.
               </video>
             </div>
