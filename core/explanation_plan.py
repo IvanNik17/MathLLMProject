@@ -11,7 +11,8 @@ class ExplanationPlan:
         missing_points=None,
         extra_points=None,
         annotations=None,
-        explanation_text=None
+        explanation_text=None,
+        additional_info=None
     ):
         self.explanation_type = explanation_type
         self.expression = expression
@@ -24,6 +25,8 @@ class ExplanationPlan:
         self.extra_points = extra_points or []
         self.annotations = annotations or []
         self.explanation_text = explanation_text
+
+        self.additional_info = additional_info
 
         self.validate()
 
@@ -40,7 +43,8 @@ class ExplanationPlan:
             "missing_points": self.missing_points,
             "extra_points": self.extra_points,
             "annotations": self.annotations,
-            "explanation_text": self.explanation_text
+            "explanation_text": self.explanation_text,
+            "additional_info": self.additional_info
         }.__str__()
     
 
@@ -68,7 +72,8 @@ class ExplanationPlan:
             "correct",
             "extra_root",
             "no_real_roots",
-            "wrong_period"
+            "wrong_period",
+            "correct_periodic"
         ]
 
         if self.explanation_type not in valid_types:

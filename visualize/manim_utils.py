@@ -262,3 +262,13 @@ def calculate_step(value_range):
         return 20
 
     return 50
+
+
+def create_period_brace(start_point, period):
+    #calculate end point
+    end_point = Dot([start_point[0] + period, 0, 0])
+    # Create brace
+    line = Line(start_point, end_point.get_center()) # Line needed to cunstruct brace. Remains invisible
+    brace = Brace(line)
+    brace_text = brace.get_text(f"Period n * {period}")
+    return brace, brace_text

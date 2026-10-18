@@ -107,6 +107,66 @@ class BaseMathScene(Scene):
                 GrowFromCenter(marker)
             )
 
+    def show_correct_period(self, axes):
+
+        plan = self.get_plan()
+
+        # Get period
+        period =  plan.additional_info["period"] 
+
+        # Create next period point
+        second_period_marker = create_root_marker(
+            axes,
+            plan.correct_roots()[0] + period,
+            color=BLUE,
+            label="Next period"
+        )
+
+        self.play(
+            GrowFromCenter(second_period_marker)
+        )
+
+        # Create brace
+        dot1 = Dot([plan.correct_roots()[0], 0 , 0])
+        line = Line(dot1.get_center(), second_period_marker.get_center())
+        brace = Brace(line)
+        brace_text = brace.get_text(f"Correct Period: n * {period}")
+        self.play(
+            GrowFromCenter(brace),
+            GrowFromCenter(brace_text)
+        )
+
+    def show_student_period(self, axes):
+
+        plan = self.get_plan()
+
+        # Get student period
+        student_period = plan.additional_info["student_root"]
+
+        # Create point for student period
+        second_period_marker = create_root_marker(
+            axes,
+            plan.correct_roots()[0] + student_period,
+            color=RED,
+            label="Student answer"
+        )
+
+        self.play(
+            GrowFromCenter(second_period_marker)
+        )
+
+        # Create brace
+        dot1 = Dot([plan.correct_roots()[0], 0 , 0])
+        line = Line(dot1.get_center(), second_period_marker.get_center())
+        brace = Brace(line)
+        brace_text = brace.get_text(f"Student Period: n * {period}")
+        self.play(
+            GrowFromCenter(brace),
+            GrowFromCenter(brace_text)
+        )
+        
+
+
     def validate_plan(
         self,
         plan,

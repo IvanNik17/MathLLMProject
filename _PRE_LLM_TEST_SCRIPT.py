@@ -26,7 +26,13 @@ student_roots = answer_parser.parse_roots(
     student_answer
 )
 
-MathProblemParser.parse_periodic_equation(expression, student_roots, student_period)
+plan = MathProblemParser.parse_periodic_equation(expression, student_roots, student_period)
+print(plan.additional_info)
+
+
+renderer = ManimRenderer()
+
+renderer.render(plan)
 
 # plan = MathProblemParser.parse_periodic_equation(
 #     expression,
