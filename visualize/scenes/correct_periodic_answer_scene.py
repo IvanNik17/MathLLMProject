@@ -26,13 +26,13 @@ class CorrectPeriodicAnswerScene(BaseMathScene):
 
         self.validate_plan(
             plan,
-            "correct"
+            "correct_periodic"
         )
 
        
 
         correct_roots = plan.correct_roots()
-
+        correct_period = plan.additional_info["period"]
 
         title, equation = self.create_header()
 
@@ -71,8 +71,6 @@ class CorrectPeriodicAnswerScene(BaseMathScene):
         # Stage 3: Show roots
         # ==============================
 
-        dots = []
-
 
         self.show_correct_roots(axes)
 
@@ -93,13 +91,19 @@ class CorrectPeriodicAnswerScene(BaseMathScene):
 
         self.wait(2)
 
+        # ==============================
+        # Stage 4: Show period
+        # ==============================        
+        self.show_correct_period(axes)
+        
+
 
         # ==============================
-        # Stage 4: Final confirmation
+        # Stage 5: Final confirmation
         # ==============================
 
         final_text = create_explanation_text(
-            f"Correct! Solutions: {correct_roots}"
+            f"Correct! Solutions: {correct_roots} Period: {correct_period}"
         )
 
         final_text.to_edge(DOWN)

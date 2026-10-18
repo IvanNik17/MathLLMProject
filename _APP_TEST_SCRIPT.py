@@ -11,7 +11,7 @@ print(math_helper.math_problem_parser.__file__)
 
 expression =  "sin(x)"
 
-student_answer = "I think the answer for x = 3.1415926535 and x = 0"
+student_answer = "I think the answer for x = 3.1415926535 and x = 0, x = 6.28318"
 
 
 llm = LLMExplainer(

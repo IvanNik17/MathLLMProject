@@ -299,7 +299,7 @@ class MathProblemParser:
         ]
 
         # No real roots
-        if len(correct_period) == 0:
+        if len(correct_roots) == 0:
             return ExplanationPlan(
                 explanation_type="no_real_roots",
                 expression=expression,
@@ -313,9 +313,26 @@ class MathProblemParser:
                 wrong_points=wrong_points,
                 missing_points=missing_points,
                 extra_points=extra_points,
-                explanation_text="The graph never crosses the x-axis."
+                explanation_text="The graph never crosses the x-axis.",
+                additional_info={"period":round(correct_period, 3)}
             )
         # Correct answer
+        if roots_match(student_roots, correct_roots) and MathEngine.expression_match(student_period, correct_period):
+            return ExplanationPlan(
+                explanation_type="correct_periodic",
+                expression=expression,
+                correct_points=[(x, 0) for x in correct_roots],
+                student_points=[(x, 0) for x in student_roots],
+                steps=[
+                    "show_graph",
+                    "celebrate_solution"
+                ],
+                wrong_points=wrong_points,
+                missing_points=missing_points,
+                extra_points=extra_points,
+                explanation_text="The graph crosses the x-axis at the correct solutions.",
+                additional_info={"period":round(correct_period, 3)}
+            )
 
         # Wrong period
 
@@ -338,7 +355,8 @@ class MathProblemParser:
             wrong_points=wrong_points,
             missing_points=missing_points,
             extra_points=extra_points,
-            explanation_text="For periodic functions we want to find everytime y = 0 for the first period and the period length"
+            explanation_text="For periodic functions we want to find everytime y = 0 for the first period and the period length",
+            additional_info={"period":round(correct_period, 3)}
         )
     
     
