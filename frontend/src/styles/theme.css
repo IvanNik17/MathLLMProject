@@ -20,6 +20,11 @@
   --color-text-muted: rgba(255, 255, 255, 0.7);
   --color-text-faint: rgba(255, 255, 255, 0.45);
 
+  /* Verdicts (how an answer was judged) */
+  --color-correct: #4ade80;
+  --color-partial: #f2c94c;
+  --color-incorrect: #ff6b6b;
+
   /* Surfaces (boxes layered on the background) */
   --color-surface: rgba(255, 255, 255, 0.03);
   --color-surface-raised: rgba(255, 255, 255, 0.05);

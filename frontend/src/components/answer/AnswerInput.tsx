@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import type { MathfieldElement } from 'mathlive';
 import AnswerRow from './AnswerRow';
 import ShortcutButtons from './ShortcutButtons';
-import { createEmptyAnswer, type AnswerEntry } from './answerEntry';
+import { createAnswer, type AnswerEntry } from './answerEntry';
 import type { MathShortcut } from './shortcuts';
 import './AnswerInput.css';
 
@@ -25,7 +25,7 @@ export default function AnswerInput({ variable, answers, onAnswersChange }: Answ
   }
 
   function addSolution() {
-    onAnswersChange([...answers, createEmptyAnswer()]);
+    onAnswersChange([...answers, createAnswer()]);
   }
 
   function removeAnswer(id: number) {
@@ -36,7 +36,7 @@ export default function AnswerInput({ variable, answers, onAnswersChange }: Answ
 
   function clearAll() {
     activeFieldRef.current = null;
-    onAnswersChange([createEmptyAnswer()]);
+    onAnswersChange([createAnswer()]);
   }
 
   function insertShortcut(shortcut: MathShortcut) {

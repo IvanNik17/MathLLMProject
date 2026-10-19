@@ -9,6 +9,6 @@ export type AnswerEntry = {
 
 let nextId = 1;
 
-export function createEmptyAnswer(): AnswerEntry {
-  return { id: nextId++, latex: '' };
+export function createAnswer(latex = ''): AnswerEntry {
+  return { id: nextId++, latex };
 }

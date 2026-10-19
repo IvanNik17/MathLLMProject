@@ -1,58 +1,52 @@
 import { useState } from 'react';
+import type { Problem } from '../api/types';
 import AppHeader from '../components/layout/AppHeader';
-import { GuideButton, MenuButton } from '../components/layout/CornerButtons';
-import ProgressSteps from '../components/layout/ProgressSteps';
 import MathDisplay from '../components/math/MathDisplay';
 import AnswerInput from '../components/answer/AnswerInput';
-import AnswerPreview from '../components/answer/AnswerPreview';
-import { createEmptyAnswer, type AnswerEntry } from '../components/answer/answerEntry';
+import { createAnswer, type AnswerEntry } from '../components/answer/answerEntry';
 import './AnswerPage.css';
 
-// A hard-coded example problem until problems come from the backend.
-const EXAMPLE_PROBLEM = {
-  equationLatex: 'x^2 - 4 = 0',
-  variable: 'x',
+type AnswerPageProps = {
+  problem: Problem;
+  initialAnswers: string[];
+  errorMessage: string | null;
+  onSubmit: (answers: string[]) => void;
 };
 
-export default function AnswerPage() {
-  const [answers, setAnswers] = useState<AnswerEntry[]>(() => [createEmptyAnswer()]);
+export default function AnswerPage({ problem, initialAnswers, errorMessage, onSubmit }: AnswerPageProps) {
+  const [answers, setAnswers] = useState<AnswerEntry[]>(() =>
+    initialAnswers.length > 0 ? initialAnswers.map((latex) => createAnswer(latex)) : [createAnswer()],
+  );
 
   // Only allow checking once no empty boxes are left (e.g. a fraction with nothing below the line).
   // MathLive writes an empty box as "\placeholder{}" in the LaTeX.
-  const hasEmptyBoxes = answers.some((answer) => answer.latex.includes('\\placeholder'));
-  const canCheck = !hasEmptyBoxes;
-
-  function handleAnswersChange(newAnswers: AnswerEntry[]) {
-    setAnswers(newAnswers);
-  }
+  const filledAnswers = answers.map((answer) => answer.latex).filter((latex) => latex.trim() !== '');
+  const hasEmptyBoxes = filledAnswers.some((latex) => latex.includes('\\placeholder'));
+  const canCheck = filledAnswers.length > 0 && !hasEmptyBoxes;
 
   return (
     <div className="answer-page">
-      <AppHeader />
+      <section>
+        <p className="answer-page__instruction">
+          {problem.title} · Solve for {problem.variable}
+        </p>
+        <MathDisplay latex={problem.equationLatex} className="answer-page__equation" />
+      </section>
 
-      <main className="answer-page__content">
-        <section className="answer-page__problem">
-          <p className="answer-page__instruction">Solve for {EXAMPLE_PROBLEM.variable}</p>
-          <MathDisplay latex={EXAMPLE_PROBLEM.equationLatex} className="answer-page__equation" />
-        </section>
+      <AnswerInput variable={problem.variable} answers={answers} onAnswersChange={setAnswers} />
 
-        <AnswerInput
-          variable={EXAMPLE_PROBLEM.variable}
-          answers={answers}
-          onAnswersChange={handleAnswersChange}
-        />
-
-        <div className="answer-page__actions">
-          {hasEmptyBoxes && <p className="answer-page__hint">Fill in the empty boxes first</p>}
-          <button
-            type="button"
-            className="check-button"
-            disabled={!canCheck}
-          >
-            Check answer
-          </button>
-        </div>
-      </main>
+      <div className="answer-page__actions">
+        {hasEmptyBoxes && <p className="answer-page__hint">Fill in the empty boxes first</p>}
+        {errorMessage && <p className="answer-page__error">{errorMessage}</p>}
+        <button
+          type="button"
+          className="button button--primary answer-page__check"
+          disabled={!canCheck}
+          onClick={() => onSubmit(filledAnswers)}
+        >
+          Check answer
+        </button>
+      </div>
 
     </div>
   );
