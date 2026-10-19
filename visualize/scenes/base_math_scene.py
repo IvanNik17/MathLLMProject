@@ -107,7 +107,7 @@ class BaseMathScene(Scene):
                 GrowFromCenter(marker)
             )
 
-    def show_correct_period(self, axes):
+    def show_correct_period(self, axes, _brace=None, _brace_text=None):
 
         plan = self.get_plan()
 
@@ -131,24 +131,30 @@ class BaseMathScene(Scene):
         line = Line(dot1.get_center(), second_period_marker.get_center())
         brace = Brace(line)
         brace_text = brace.get_text(f"Correct Period: n * {period}")
-        self.play(
-            GrowFromCenter(brace),
-            GrowFromCenter(brace_text)
-        )
+
+        if _brace is not None and _brace_text is not None:
+            anims = [Transform(_brace, brace),
+                Transform(_brace_text, brace_text)]
+            self.play(anims)
+        else:
+            self.play(
+                GrowFromCenter(brace),
+                GrowFromCenter(brace_text)
+            )
 
     def show_student_period(self, axes):
 
         plan = self.get_plan()
 
         # Get student period
-        student_period = plan.additional_info["student_root"]
+        student_period = plan.additional_info["student_period"]
 
         # Create point for student period
         second_period_marker = create_root_marker(
             axes,
             plan.correct_roots()[0] + student_period,
             color=RED,
-            label="Student answer"
+            label="Student answer next period"
         )
 
         self.play(
@@ -159,11 +165,13 @@ class BaseMathScene(Scene):
         dot1 = Dot([plan.correct_roots()[0], 0 , 0])
         line = Line(dot1.get_center(), second_period_marker.get_center())
         brace = Brace(line)
-        brace_text = brace.get_text(f"Student Period: n * {period}")
+        brace_text = brace.get_text(f"Student Period: n * {student_period}")
         self.play(
             GrowFromCenter(brace),
             GrowFromCenter(brace_text)
         )
+
+        return brace, brace_text
         
 
 

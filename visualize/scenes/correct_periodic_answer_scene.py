@@ -26,7 +26,7 @@ class CorrectPeriodicAnswerScene(BaseMathScene):
 
         self.validate_plan(
             plan,
-            "correct_periodic"
+            "correct_period"
         )
 
        
