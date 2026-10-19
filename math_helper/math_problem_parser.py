@@ -1,6 +1,7 @@
 from core.explanation_plan import ExplanationPlan
 from math_helper.math_engine import MathEngine
 from math_helper.expression_evaluator import ExpressionEvaluator
+import sympy as sp
 
 
 def roots_match(
@@ -242,7 +243,7 @@ class MathProblemParser:
         )
 
     @staticmethod
-    def parse_periodic_equation(expression, student_roots, student_period):
+    def parse_periodic_equation(expression, student_roots, student_period=None):
         correct_roots, correct_period = MathEngine.solve_periodic_equation(expression)
 
         if correct_period is None or correct_period == 0:
@@ -319,7 +320,7 @@ class MathProblemParser:
         # Correct answer
         if roots_match(student_roots, correct_roots) and MathEngine.expression_match(student_period, correct_period):
             return ExplanationPlan(
-                explanation_type="correct_periodic",
+                explanation_type="correct_period",
                 expression=expression,
                 correct_points=[(x, 0) for x in correct_roots],
                 student_points=[(x, 0) for x in student_roots],
@@ -331,14 +332,97 @@ class MathProblemParser:
                 missing_points=missing_points,
                 extra_points=extra_points,
                 explanation_text="The graph crosses the x-axis at the correct solutions.",
-                additional_info={"period":round(correct_period, 3)}
+                additional_info={"period":round(correct_period, 3), 
+                                 "student_period":round(sp.sympify(student_period), 3)
+                        }
             )
 
-        # Wrong period
+        # Wrong period (and correct roots)
+        if roots_match(student_roots, correct_roots) and not MathEngine.expression_match(student_period, correct_period):
+                    return ExplanationPlan(
+                        explanation_type="wrong_period",
+                        expression=expression,
+                        correct_points=[(x, 0) for x in correct_roots],
+                        student_points=[(x, 0) for x in student_roots],
+                        steps=[
+                            "show_graph",
+                            "celebrate_solution"
+                        ],
+                        wrong_points=wrong_points,
+                        missing_points=missing_points,
+                        extra_points=extra_points,
+                        explanation_text="The graph crosses the x-axis at the correct solutions. But the given period is wrong.",
+                        additional_info={"period":round(correct_period, 3), 
+                                         "student_period":round(sp.sympify(student_period), 3)
+                        }
+                    )
+
+        # Missing period (and correct roots)
 
         # Extra root
+        if any(
+            not any(
+                abs(student-root)<0.01
+                for root in correct_roots
+            )
+            for student in student_roots
+        ) and len(student_roots) > len(correct_roots):
+
+
+            return ExplanationPlan(
+                explanation_type="extra_root",
+                expression=expression,
+                correct_points=[
+                    (x,0)
+                    for x in correct_roots
+                ],
+                student_points=[
+                    (x,0)
+                    for x in student_roots
+                ],
+                steps=[
+                    "show_graph",
+                    "show_student_answers",
+                    "highlight_extra_root",
+                    "explain_solution"
+                ],
+                wrong_points=wrong_points,
+                missing_points=missing_points,
+                extra_points=extra_points,
+                explanation_text="One of the answers is not actually a root."
+            )
 
         # Missed root
+        if all(
+            any(
+                abs(student-root) < 0.01
+                for root in correct_roots
+            )
+            for student in student_roots
+        ):
+
+            return ExplanationPlan(
+                explanation_type="missed_root",
+                expression=expression,
+                correct_points=[
+                    (x, 0)
+                    for x in correct_roots
+                ],
+                student_points=[
+                    (x, 0)
+                    for x in student_roots
+                ],
+                steps=[
+                    "show_graph",
+                    "show_student_answers",
+                    "highlight_missing_root",
+                    "explain_solution"
+                ],
+                wrong_points=wrong_points,
+                missing_points=missing_points,
+                extra_points=extra_points,
+                explanation_text="There is another solution."
+            )
 
         # Wrong root
         return ExplanationPlan(
