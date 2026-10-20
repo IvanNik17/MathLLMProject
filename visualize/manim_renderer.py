@@ -84,8 +84,14 @@ class ManimRenderer:
                 result.stderr
             )
 
-        video_dir = Path(
-            "media/videos/generated_scene"
-        )
 
-        return video_dir
+
+        video_path = Path("media/videos/generated_scene/480p15/GeneratedScene.mp4")
+
+        if not video_path.exists():
+            raise FileNotFoundError(
+                f"Rendered video not found: {video_path}"
+            )
+
+        return video_path
+
