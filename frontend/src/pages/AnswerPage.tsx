@@ -22,7 +22,7 @@ export default function AnswerPage({ problem, initialAnswers, errorMessage, onSu
   // MathLive writes an empty box as "\placeholder{}" in the LaTeX.
   const filledAnswers = answers.map((answer) => answer.latex).filter((latex) => latex.trim() !== '');
   const hasEmptyBoxes = filledAnswers.some((latex) => latex.includes('\\placeholder'));
-  const canCheck = filledAnswers.length > 0 && !hasEmptyBoxes;
+  const canCheck = !hasEmptyBoxes;
 
   return (
     <div className="answer-page">
