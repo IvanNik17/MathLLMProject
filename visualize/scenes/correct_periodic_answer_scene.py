@@ -72,7 +72,7 @@ class CorrectPeriodicAnswerScene(BaseMathScene):
         # ==============================
 
 
-        self.show_correct_roots(axes)
+        roots, root_texts = self.show_correct_roots(axes)
 
 
         print(plan)
@@ -94,6 +94,7 @@ class CorrectPeriodicAnswerScene(BaseMathScene):
         # ==============================
         # Stage 4: Show period
         # ==============================        
+        self.play(Unwrite(root_texts))
         self.show_correct_period(axes)
         
 

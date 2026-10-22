@@ -250,16 +250,6 @@ class MathProblemParser:
             print("Error: equation is aperiodic!")
             return None #TODO: Find out what to do in this case
 
-        complete_answers = [
-            f"{x} + {correct_period}"
-            for x in correct_roots
-        ]
-
-        complete_student_answers = [
-            f"{x} + {student_period}"
-            for x in student_roots
-        ]
-
         #Wrong roots and points
         wrong_roots = [
             x
@@ -317,6 +307,27 @@ class MathProblemParser:
                 explanation_text="The graph never crosses the x-axis.",
                 additional_info={"period":round(correct_period, 3)}
             )
+        
+        # Missing period (and correct roots)
+        if roots_match(student_roots, correct_roots) and (student_period == None or student_period == ""):
+             return ExplanationPlan(
+                explanation_type="missing_period",
+                expression=expression,
+                correct_points=[(x, 0) for x in correct_roots],
+                student_points=[(x, 0) for x in student_roots],
+                steps=[
+                    "show_graph",
+                    "celebrate_solution"
+                ],
+                wrong_points=wrong_points,
+                missing_points=missing_points,
+                extra_points=extra_points,
+                explanation_text="The graph crosses the x-axis at the correct solutions.",
+                additional_info={"period":round(correct_period, 3), 
+                                "student_period":""
+                        }
+            )
+        
         # Correct answer
         if roots_match(student_roots, correct_roots) and MathEngine.expression_match(student_period, correct_period):
             return ExplanationPlan(
@@ -356,8 +367,6 @@ class MathProblemParser:
                                          "student_period":round(sp.sympify(student_period), 3)
                         }
                     )
-
-        # Missing period (and correct roots)
 
         # Extra root
         if any(
