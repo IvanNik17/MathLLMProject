@@ -56,6 +56,9 @@ class BaseMathScene(Scene):
 
         plan = self.get_plan()
 
+        if "period" in plan.additional_info.keys():
+            next_period = plan.correct_roots()[0] + plan.additional_info["period"]
+
         axes = create_dynamic_axes(
             plan.expression,
             ExpressionEvaluator,
@@ -76,6 +79,9 @@ class BaseMathScene(Scene):
 
         plan = self.get_plan()
 
+        dots = []
+        texts = []
+
         for root in plan.student_roots():
 
             marker = create_root_marker(
@@ -88,11 +94,18 @@ class BaseMathScene(Scene):
             self.play(
                 GrowFromCenter(marker)
             )
+            dots.append(marker[0])
+            texts.append(marker[1])
+
+        return VGroup(*dots), VGroup(*texts)
 
 
     def show_correct_roots(self, axes):
 
         plan = self.get_plan()
+
+        dots = []
+        texts = []
 
         for root in plan.correct_roots():
 
@@ -106,8 +119,13 @@ class BaseMathScene(Scene):
             self.play(
                 GrowFromCenter(marker)
             )
+            dots.append(marker[0])
+            texts.append(marker[1])
 
-    def show_correct_period(self, axes, _brace=None, _brace_text=None):
+        return VGroup(*dots), VGroup(*texts)
+
+
+    def show_correct_period(self, axes, _brace=None, _brace_text=None, tex_overide=None):
 
         plan = self.get_plan()
 
@@ -131,6 +149,8 @@ class BaseMathScene(Scene):
         line = Line(dot1.get_center(), second_period_marker.get_center())
         brace = Brace(line)
         brace_text = brace.get_text(f"Correct Period: n * {period}")
+        if tex_overide is not None:
+            brace_text = brace.get_tex(tex_overide)
 
         if _brace is not None and _brace_text is not None:
             anims = [Transform(_brace, brace),
@@ -141,6 +161,8 @@ class BaseMathScene(Scene):
                 GrowFromCenter(brace),
                 GrowFromCenter(brace_text)
             )
+
+        return brace, brace_text
 
     def show_student_period(self, axes):
 

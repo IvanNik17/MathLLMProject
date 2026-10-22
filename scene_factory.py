@@ -5,6 +5,7 @@ from visualize.scenes.extra_solution_scene import ExtraSolutionScene
 from visualize.scenes.no_real_solution_scene import NoRealSolutionScene
 from visualize.scenes.correct_periodic_answer_scene import CorrectPeriodicAnswerScene 
 from visualize.scenes.wrong_periodic_answer_scene import WrongPeriodicAnswerScene
+from visualize.scenes.missing_periodic_answer_scene import MissingPeriodicAnswerScene
 
 class SceneFactory:
 
@@ -50,6 +51,10 @@ class SceneFactory:
             WrongPeriodicAnswerScene.PLAN = plan
 
             return WrongPeriodicAnswerScene
+        elif plan.explanation_type == "missing_period":
+
+            MissingPeriodicAnswerScene.PLAN = plan
+            return MissingPeriodicAnswerScene
 
         raise ValueError(
             f"No scene registered for "
