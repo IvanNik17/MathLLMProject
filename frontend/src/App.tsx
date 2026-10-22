@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { fetchProblems, submitAttempt } from './api/api';
 import type { AttemptResult, Problem } from './api/types';
 import AppHeader from './components/layout/AppHeader';
+import { GuideButton, MenuButton } from './components/layout/CornerButtons';
+import ProblemList from './components/problems/ProblemList';
 import StatusMessage from './components/layout/StatusMessage';
 import AnswerPage from './pages/AnswerPage';
 import CheckingPage from './pages/CheckingPage';
@@ -21,6 +23,8 @@ export default function App() {
   const [problems, setProblems] = useState<Problem[] | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [problemIndex, setProblemIndex] = useState(0);
+  const [solvedProblemIds, setSolvedProblemIds] = useState<number[]>([]);
+  const [isProblemListOpen, setIsProblemListOpen] = useState(false);  
 
   // The current attempt at the current problem
   const [phase, setPhase] = useState<Phase>('answering');
@@ -55,6 +59,10 @@ export default function App() {
       const attemptResult = await submitAttempt(problem.id, submittedAnswers);
       setResult(attemptResult);
       setPhase('feedback');
+      // Remember correctly solved problems, for the ticks in the problem list.
+      if (attemptResult.verdict === 'correct' && !solvedProblemIds.includes(problem.id)) {
+        setSolvedProblemIds([...solvedProblemIds, problem.id]);
+      }
     } catch (error) {
       // Go back to the answer page, keeping the answers, and say what went wrong
       setSubmitError(`Couldn't check your answer. ${String(error)}`);
@@ -67,15 +75,23 @@ export default function App() {
     setResult(null);
     setPhase('answering');
   }
-
+  
+  /** Switches to the problem at the given position in the list, starting fresh. */
+  function selectProblem(index: number) {
+    setProblemIndex(index);
+    setAnswers([]);
+    setResult(null);
+    setSubmitError(null);
+    setPhase('answering');
+    setIsProblemListOpen(false);
+  }
+  
   function handleNextProblem() {
     if (!problems) return;
     // After the last problem, start again from the first
-    setProblemIndex((index) => (index + 1) % problems.length);
-    setAnswers([]);
-    setResult(null);
-    setPhase('answering');
+    selectProblem((problemIndex + 1) % problems.length);
   }
+
 
   /** Picks what to show in the middle of the page */
   function renderPage() {
@@ -123,12 +139,27 @@ export default function App() {
     );
   }
 
+  const canUseProblemList = phase === 'answering' && problems !== null && problems.length > 0;
+  
   return (
     <div className="app">
       <AppHeader />
 
-      <main className="app__content">{renderPage()}</main>
+      {canUseProblemList && (
+        <MenuButton isOpen={false} onClick={() => setIsProblemListOpen(true)} />
+      )}
 
+      <main className="app__content">{renderPage()}</main>
+      
+      {canUseProblemList && isProblemListOpen && (
+        <ProblemList
+          problems={problems}
+          currentProblemId={problems[problemIndex].id}
+          solvedProblemIds={solvedProblemIds}
+          onSelect={selectProblem}
+          onClose={() => setIsProblemListOpen(false)}
+        />
+      )}
     </div>
   );
 }

@@ -30,6 +30,8 @@
   --color-surface-raised: rgba(255, 255, 255, 0.05);
   --color-surface-hover: rgba(255, 255, 255, 0.09);
   --color-surface-sunken: rgba(0, 0, 0, 0.35);
+  --color-panel: #14171c; /* solid background for panels that cover the page */
+  --color-backdrop: rgba(0, 0, 0, 0.45); /* dims the page behind a panel */
 
   /* Borders */
   --color-border: rgba(255, 255, 255, 0.08);

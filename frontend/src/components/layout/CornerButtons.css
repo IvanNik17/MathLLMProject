@@ -1,0 +1,47 @@
+.menu-button {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  color: var(--color-text);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-left: none;
+  border-radius: 0 var(--radius-medium) var(--radius-medium) 0;
+}
+
+.guide-button {
+  position: absolute;
+  top: 22px;
+  right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+.guide-button__box {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  font-size: 60px;
+  background: var(--color-surface-raised);
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius-medium);
+}
+
+.guide-button__label {
+  font-size: 20px;
+}
+
+.menu-button:hover,
+.guide-button:hover .guide-button__box {
+  background: var(--color-surface-hover);
+}
