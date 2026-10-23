@@ -7,18 +7,10 @@
     <list default="true" id="d7d8b666-ccf5-4350-8608-be04719b292d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api_communication/api_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/api_server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/media/videos/generated_scene/480p15/GeneratedScene.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/media/videos/generated_scene/480p15/GeneratedScene.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/videos/generated_scene/480p15/partial_movie_files/GeneratedScene/1185818338_903986980_223132457.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/videos/generated_scene/480p15/partial_movie_files/GeneratedScene/624642324_2369998052_4270358112.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/videos/generated_scene/480p15/partial_movie_files/GeneratedScene/624642324_2418216399_985195915.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/videos/generated_scene/480p15/partial_movie_files/GeneratedScene/624642324_2680424312_985195915.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/videos/generated_scene/480p15/partial_movie_files/GeneratedScene/624642324_3405425087_1283358424.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/videos/generated_scene/480p15/partial_movie_files/GeneratedScene/624642324_397949198_3658976305.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/videos/generated_scene/480p15/partial_movie_files/GeneratedScene/624642324_4166842112_372234014.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/videos/generated_scene/480p15/partial_movie_files/GeneratedScene/624642324_4166842112_4009945737.mp4" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/media/videos/generated_scene/480p15/partial_movie_files/GeneratedScene/partial_movie_file_list.txt" beforeDir="false" afterPath="$PROJECT_DIR$/media/videos/generated_scene/480p15/partial_movie_files/GeneratedScene/partial_movie_file_list.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/visualize/manim_renderer.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize/manim_renderer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +19,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="120" />
+    <option name="cachedIndexableFilesCount" value="223" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -45,61 +37,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.3685673043227753" />
-      <entry key="MS500" value="1.8190366978651173" />
-      <entry key="S2" value="1.9528348171032857" />
-      <entry key="S5" value="2.054767099913562" />
-      <entry key="S10" value="2.263082030630221" />
-      <entry key="S30" value="2.85634063841703" />
-      <entry key="S60" value="6.56653638263581" />
-      <entry key="M2" value="24.78281205899769" />
-      <entry key="M5" value="82.90105155778036" />
-      <entry key="M10" value="133.95178279506146" />
-      <entry key="M15" value="160.83642016829427" />
-      <entry key="M30" value="207.84906230551053" />
-      <entry key="H1" value="264.12121282862313" />
-      <entry key="H2" value="320.6124329215568" />
-      <entry key="H4" value="363.78686408269226" />
-      <entry key="D1" value="411.7395698019697" />
-      <entry key="W1" value="421.35289198428734" />
+      <entry key="MS100" value="1.0008384989248222" />
+      <entry key="MS500" value="1.4317665868222467" />
+      <entry key="S2" value="3.670477025632339" />
+      <entry key="S5" value="6.2807639143379905" />
+      <entry key="S10" value="8.11288141022155" />
+      <entry key="S30" value="9.882947261774122" />
+      <entry key="S60" value="10.419155554068864" />
+      <entry key="M2" value="10.713402879023267" />
+      <entry key="M5" value="11.629205457094152" />
+      <entry key="M10" value="16.9388959796062" />
+      <entry key="M15" value="31.547884982132498" />
+      <entry key="M30" value="116.50174982020835" />
+      <entry key="H1" value="293.54080464455586" />
+      <entry key="H2" value="505.2787618593102" />
+      <entry key="H4" value="682.1074703970232" />
+      <entry key="D1" value="892.4863972777928" />
+      <entry key="W1" value="936.4147630067876" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="0.0" />
-      <entry key="S10" value="3.2190667816481363E-199" />
-      <entry key="S30" value="1.5976969745743426E-66" />
-      <entry key="S60" value="2.7972678145611488E-33" />
-      <entry key="M2" value="1.2630398125782557E-16" />
-      <entry key="M5" value="1.3484874341670246E-6" />
-      <entry key="M10" value="0.00307010859633821" />
-      <entry key="M15" value="0.04117463580189099" />
-      <entry key="M30" value="0.5754663216286342" />
-      <entry key="H1" value="2.2281841515272136" />
-      <entry key="H2" value="4.449483773327058" />
-      <entry key="H4" value="6.317031312170862" />
-      <entry key="D1" value="8.482214081052717" />
-      <entry key="W1" value="8.924081262891857" />
+      <entry key="S2" value="3.1428071417813807E-187" />
+      <entry key="S5" value="2.505688573728213E-75" />
+      <entry key="S10" value="5.005685341417509E-38" />
+      <entry key="S30" value="3.685427314105727E-13" />
+      <entry key="S60" value="6.071126738525184E-7" />
+      <entry key="M2" value="7.851073873659125E-4" />
+      <entry key="M5" value="0.06533638764231095" />
+      <entry key="M10" value="0.34882786847387304" />
+      <entry key="M15" value="0.716620825474434" />
+      <entry key="M30" value="2.079587238660906" />
+      <entry key="H1" value="4.830056393688493" />
+      <entry key="H2" value="8.742749249713219" />
+      <entry key="H4" value="12.562149280564539" />
+      <entry key="D1" value="17.66864948222699" />
+      <entry key="W1" value="18.802124542405714" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.1508233402384611" />
-      <entry key="MS500" value="1.7570736301143883" />
-      <entry key="S2" value="1.9359067818895088" />
-      <entry key="S5" value="2.046028833451674" />
-      <entry key="S10" value="2.256157963986656" />
-      <entry key="S30" value="2.852043221609968" />
-      <entry key="S60" value="6.561890662940769" />
-      <entry key="M2" value="24.776572327210932" />
-      <entry key="M5" value="82.89490411405994" />
-      <entry key="M10" value="133.95025877609643" />
-      <entry key="M15" value="160.87349948769062" />
-      <entry key="M30" value="208.41978459602475" />
-      <entry key="H1" value="266.3440018328442" />
-      <entry key="H2" value="325.05739702461204" />
-      <entry key="H4" value="370.10090126713135" />
-      <entry key="D1" value="420.2211460660096" />
-      <entry key="W1" value="430.2768781245777" />
+      <entry key="MS100" value="0.9667517884021475" />
+      <entry key="MS500" value="1.4222893201925233" />
+      <entry key="S2" value="3.664381305857298" />
+      <entry key="S5" value="6.276452655670221" />
+      <entry key="S10" value="8.110058309603557" />
+      <entry key="S30" value="9.88179014006615" />
+      <entry key="S60" value="10.418544631644872" />
+      <entry key="M2" value="10.7137769863157" />
+      <entry key="M5" value="11.691594836017394" />
+      <entry key="M10" value="17.2812209263028" />
+      <entry key="M15" value="32.2566164844491" />
+      <entry key="M30" value="118.57180569783412" />
+      <entry key="H1" value="298.3608031251754" />
+      <entry key="H2" value="514.0128880534876" />
+      <entry key="H4" value="694.6636202284321" />
+      <entry key="D1" value="910.1536815097444" />
+      <entry key="W1" value="955.2166811032836" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -111,36 +103,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Communication&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.latex_to_sympy.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "LatexConverter",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "C:\\Users\\Alexander\\Desktop\\MathLLMProject\\frontend\\node_modules\\typescript\\lib"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Alexander\Desktop\MathLLMProject" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="DjangoTestsConfigurationType">
+    <configuration name="latex_to_sympy" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="MathLLMProject" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -149,182 +143,21 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="SDK_NAME" value="~\miniconda3\envs\MathLLM" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="DEBUG_JUST_MY_CODE" value="false" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
-      <option name="TARGET" value="" />
-      <option name="SETTINGS_FILE" value="" />
-      <option name="CUSTOM_SETTINGS" value="false" />
-      <option name="USE_OPTIONS" value="false" />
-      <option name="OPTIONS" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <module name="MathLLMProject" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/latex_to_sympy.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Python.Celery" factoryName="Python.Celery.App">
-      <module name="MathLLMProject" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Python.Celery" factoryName="Python.Celery.Task">
-      <module name="MathLLMProject" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Python.FlaskServer">
-      <module name="MathLLMProject" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Tox" factoryName="Tox">
-      <module name="MathLLMProject" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="docs" factoryName="Docutils task">
-      <module name="MathLLMProject" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="docutils_input_file" value="" />
-      <option name="docutils_output_file" value="" />
-      <option name="docutils_params" value="" />
-      <option name="docutils_task" value="" />
-      <option name="docutils_open_in_browser" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="docs" factoryName="Sphinx task">
-      <module name="MathLLMProject" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <option name="RUN_TOOL" value="" />
-      <option name="docutils_input_file" value="" />
-      <option name="docutils_output_file" value="" />
-      <option name="docutils_params" value="" />
-      <option name="docutils_task" value="" />
-      <option name="docutils_open_in_browser" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Autodetect">
-      <module name="MathLLMProject" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Doctests">
-      <module name="MathLLMProject" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="false" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
       <method v="2" />
     </configuration>
   </component>
@@ -349,10 +182,19 @@
       <workItem from="1792071131759" duration="269000" />
       <workItem from="1792229196581" duration="5218000" />
       <workItem from="1792234492436" duration="10000" />
+      <workItem from="1792596474732" duration="542000" />
+      <workItem from="1792597049678" duration="705000" />
+      <workItem from="1792695484601" duration="111000" />
+      <workItem from="1792695601832" duration="1978000" />
+      <workItem from="1792767595265" duration="1654000" />
+      <workItem from="1792773132994" duration="4737000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/MathLLMProject$latex_to_sympy.coverage" NAME="latex_to_sympy Coverage Results" MODIFIED="1792776819030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
 </project>

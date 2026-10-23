@@ -78,10 +78,15 @@ class ManimRenderer:
             text=True
         )
 
-
         if result.returncode != 0:
+            print("Manim stdout:")
+            print(result.stdout)
+
+            print("Manim stderr:")
+            print(result.stderr)
+
             raise RuntimeError(
-                result.stderr
+                f"Manim failed with exit code {result.returncode}"
             )
 
 

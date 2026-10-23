@@ -30,7 +30,7 @@ export async function submitAttempt(problemId: number, answers: string[]): Promi
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       problem_id: problemId,
-      answer: answers.join(', '),
+      answers: answers,
     }),
   });
 

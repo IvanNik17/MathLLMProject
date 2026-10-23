@@ -11,7 +11,7 @@ export type Verdict = 'correct' | 'missed_root' | 'extra_root' | 'wrong_root' | 
 
 export type AttemptResult = {
   problem_id: number;
-  answer: string;
+  answers: string[];
   student_roots: number[];
   verdict: Verdict;
   explanation_text: string;
