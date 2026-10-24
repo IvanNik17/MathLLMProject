@@ -68,18 +68,22 @@ async def create_attempt(request: AttemptRequest):
         )
 
     student_roots = []
+    answer_errors = []
 
-    for latex in request.answers:
+    for index, latex in enumerate(request.answers, start=1):
         print("Received LaTeX:", latex)
 
         try:
             expression = latex_to_sympy(latex)
-            # Made a bunch or error catchers.
+
             if expression.is_number is not True:
                 raise ValueError("Answer must be a numeric expression")
 
             if expression.is_real is not True:
-                raise ValueError("Answer must be real")
+                answer_errors.append(
+                    f"Answer {index} is not a real number."
+                )
+                continue
 
             value = float(expression.evalf())
 
@@ -89,18 +93,20 @@ async def create_attempt(request: AttemptRequest):
             student_roots.append(value)
             print("Converted numeric root:", value)
 
-
         except (ValueError, TypeError, OverflowError) as exc:
+            answer_errors.append(
+                f"Answer {index} ('{latex}') is invalid: {exc}"
+            )
 
-            print("ANSWER CONVERSION ERROR:", repr(exc))
-
-            raise HTTPException(
-
-                status_code=422,
-
-                detail=f"Invalid numeric answer '{latex}': {exc}"
-
-            ) from exc
+    if answer_errors:
+        raise HTTPException(
+            status_code=422,
+            detail={
+                "code": "invalid_answers",
+                "message": "Please correct the following answers:\n"
+                           + "\n".join(answer_errors)
+            }
+        )
 
     # Compare the student's numeric roots with the correct solutions
     plan = MathProblemParser.parse(
