@@ -56,14 +56,18 @@ class BaseMathScene(Scene):
 
         plan = self.get_plan()
 
-        if "period" in plan.additional_info.keys():
-            next_period = plan.correct_roots()[0] + plan.additional_info["period"]
+        #Calculculate next period if relevant
+        next_period = [0]
+        if plan.additional_info is not None and "period" in plan.additional_info.keys():
+            next_period = [plan.correct_roots()[0] + plan.additional_info["period"]]
 
+        #Create axes
         axes = create_dynamic_axes(
             plan.expression,
             ExpressionEvaluator,
             student_roots=plan.student_roots(),
-            correct_roots=plan.correct_roots()
+            correct_roots=plan.correct_roots(),
+            x_values=next_period
         )
 
         graphs = GraphBuilder.build(
