@@ -141,7 +141,8 @@ def create_root_marker(
     axes,
     x,
     color=GREEN,
-    label=None
+    label=None,
+    elevated=False
 ):
 
     dot = Dot(
@@ -165,6 +166,12 @@ def create_root_marker(
             UP
         )
 
+        print(elevated)
+        if elevated:
+            text.next_to(
+                dot,
+                DOWN
+            )
 
         objects.append(text)
 
@@ -267,11 +274,33 @@ def calculate_step(value_range):
     return 50
 
 
-def create_period_brace(start_point, period):
+def create_period_brace(axes, start_x, period):
     #calculate end point
-    end_point = Dot([start_point[0] + period, 0, 0])
+    end_x = start_x + period
+
+    #Markers
+    start_marker = create_root_marker(
+                axes,
+                start_x,
+                color=BLUE,
+                label=f"First period"
+    )
+
+    end_marker = create_root_marker(
+                    axes,
+                    end_x,
+                    color=BLUE,
+                    label=f"Second period"
+        )
+
+    # Line needed to cunstruct brace. Remains invisible
+    line = Line(
+        start_marker.get_center(), 
+        end_marker.get_center()
+    ) 
+    
     # Create brace
-    line = Line(start_point, end_point.get_center()) # Line needed to cunstruct brace. Remains invisible
     brace = Brace(line)
     brace_text = brace.get_text(f"Period n * {period}")
+
     return brace, brace_text

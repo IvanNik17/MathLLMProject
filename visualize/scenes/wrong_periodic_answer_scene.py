@@ -72,7 +72,7 @@ class WrongPeriodicAnswerScene(BaseMathScene):
         # ==============================
 
 
-        self.show_correct_roots(axes)
+        roots, root_texts = self.show_correct_roots(axes)
 
 
         print(plan)
@@ -93,11 +93,15 @@ class WrongPeriodicAnswerScene(BaseMathScene):
 
         # ==============================
         # Stage 4: Show period
-        # ==============================        
-        brace, brace_text = self.show_student_period(axes)
+        # ============================== 
+        
+        self.play(Unwrite(root_texts))       
+        #Student period
+        brace, brace_text, period_marker, period_marker_text = self.show_student_period(axes)
 
         self.wait(2)
-        
+        self.play(Unwrite(period_marker_text))
+              
         self.show_correct_period(axes, brace, brace_text)
         
 
@@ -107,7 +111,7 @@ class WrongPeriodicAnswerScene(BaseMathScene):
         # ==============================
 
         final_text = create_explanation_text(
-            f"Correct! Solutions: {correct_roots} Period: {correct_period}"
+            f"Correct Solutions: {correct_roots} bur wrong period"
         )
 
         final_text.to_edge(DOWN)
