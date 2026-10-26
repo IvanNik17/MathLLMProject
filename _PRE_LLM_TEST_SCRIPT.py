@@ -8,7 +8,7 @@ import math_helper.math_problem_parser
 
 print(math_helper.math_problem_parser.__file__)
 
-expression =  "sin(0.5*x)"
+expression =  "sin(x)"
 
 student_answer = "x = 0, 3.14159265358979323"
 student_period = "2 * pi"

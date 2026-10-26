@@ -37,6 +37,9 @@ def create_dynamic_axes(
     if correct_roots:
         important_points.extend(correct_roots)
 
+    if x_values:
+        important_points.extend(x_values)
+
     if important_points:
 
         x_min = min(
@@ -71,7 +74,7 @@ def create_dynamic_axes(
     sample_y = sample_y[valid]
 
     if len(sample_y) == 0:
-
+        print("Using default axis size")
         y_min = -5
         y_max = 5
 
