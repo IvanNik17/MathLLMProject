@@ -3,6 +3,7 @@ from manim import *
 from math_helper.expression_evaluator import ExpressionEvaluator
 
 from visualize.manim_utils import create_root_marker
+from visualize.manim_utils import create_period_brace
 
 from visualize.manim_utils import (
     create_dynamic_axes,
@@ -57,9 +58,12 @@ class BaseMathScene(Scene):
         plan = self.get_plan()
 
         #Calculculate next period if relevant
-        next_period = [0]
+        next_period = []
         if plan.additional_info is not None and "period" in plan.additional_info.keys():
-            next_period = [plan.correct_roots()[0] + plan.additional_info["period"]]
+            next_period.append(plan.correct_roots()[0] + plan.additional_info["period"])
+        
+        if plan.additional_info is not None and "student_period" in plan.additional_info.keys():
+                    next_period.append(plan.correct_roots()[0] + plan.additional_info["student_period"])
 
         #Create axes
         axes = create_dynamic_axes(
@@ -73,7 +77,7 @@ class BaseMathScene(Scene):
         graphs = GraphBuilder.build(
             axes,
             plan.expression,
-            axes.intervals
+            [(axes.x_min, axes.x_max)]
         )
 
         return axes, graphs
@@ -85,14 +89,18 @@ class BaseMathScene(Scene):
 
         dots = []
         texts = []
+        elevated = True
 
         for root in plan.student_roots():
+
+            elevated = not elevated
 
             marker = create_root_marker(
                 axes,
                 root,
                 color=RED,
-                label=f"Student: x={root:g}"
+                label=f"Student: x={root:g}",
+                elevated=elevated
             )
 
             self.play(
@@ -110,14 +118,18 @@ class BaseMathScene(Scene):
 
         dots = []
         texts = []
+        elevated = True
 
         for root in plan.correct_roots():
+
+            elevated = not elevated
 
             marker = create_root_marker(
                 axes,
                 root,
                 color=GREEN,
-                label=f"Correct: x={root:g}"
+                label=f"Correct: x={root:g}",
+                elevated=elevated
             )
 
             self.play(
@@ -129,7 +141,12 @@ class BaseMathScene(Scene):
         return VGroup(*dots), VGroup(*texts)
 
 
-    def show_correct_period(self, axes, _brace=None, _brace_text=None, tex_overide=None):
+    def show_correct_period(self, 
+        axes, 
+        _brace=None, 
+        _brace_text=None, 
+        tex_overide=None
+    ):
 
         plan = self.get_plan()
 
@@ -144,18 +161,23 @@ class BaseMathScene(Scene):
             label="Next period"
         )
 
+        #Show first root of second period
         self.play(
             GrowFromCenter(second_period_marker)
         )
 
-        # Create brace
-        dot1 = Dot([plan.correct_roots()[0], 0 , 0])
-        line = Line(dot1.get_center(), second_period_marker.get_center())
-        brace = Brace(line)
-        brace_text = brace.get_text(f"Correct Period: n * {period}")
+        #Create brace
+        brace, brace_text = create_period_brace(
+            axes,
+            plan.correct_roots()[0],
+            period
+        )
+
+        #Change text of brace if override is provided
         if tex_overide is not None:
             brace_text = brace.get_tex(tex_overide)
 
+        #Transform old brace into new, if provided
         if _brace is not None and _brace_text is not None:
             anims = [Transform(_brace, brace),
                 Transform(_brace_text, brace_text)]
@@ -166,9 +188,15 @@ class BaseMathScene(Scene):
                 GrowFromCenter(brace_text)
             )
 
+        #return brace
         return brace, brace_text
 
-    def show_student_period(self, axes):
+    def show_student_period(self, 
+        axes, 
+        _brace=None, 
+        _brace_text=None, 
+        tex_overide=None
+    ):
 
         plan = self.get_plan()
 
@@ -187,17 +215,30 @@ class BaseMathScene(Scene):
             GrowFromCenter(second_period_marker)
         )
 
-        # Create brace
-        dot1 = Dot([plan.correct_roots()[0], 0 , 0])
-        line = Line(dot1.get_center(), second_period_marker.get_center())
-        brace = Brace(line)
-        brace_text = brace.get_text(f"Student Period: n * {student_period}")
-        self.play(
-            GrowFromCenter(brace),
-            GrowFromCenter(brace_text)
+        #Create brace
+        brace, brace_text = create_period_brace(
+            axes,
+            plan.correct_roots()[0],
+            student_period
         )
 
-        return brace, brace_text
+        #Change text of brace if override is provided
+        if tex_overide is not None:
+            brace_text = brace.get_tex(tex_overide)
+
+        #Transform old brace into new, if provided
+        if _brace is not None and _brace_text is not None:
+            anims = [Transform(_brace, brace),
+                Transform(_brace_text, brace_text)]
+            self.play(anims)
+        else:
+            self.play(
+                GrowFromCenter(brace),
+                GrowFromCenter(brace_text)
+            )
+
+        #return brace
+        return brace, brace_text, second_period_marker[0], second_period_marker[1]
         
 
 
