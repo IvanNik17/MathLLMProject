@@ -3,6 +3,7 @@ import { fetchProblems, submitAttempt } from './api/api';
 import type { AttemptResult, Problem } from './api/types';
 import AppHeader from './components/layout/AppHeader';
 import { GuideButton, MenuButton } from './components/layout/CornerButtons';
+import ProgressSteps from './components/layout/ProgressSteps';
 import ProblemList from './components/problems/ProblemList';
 import StatusMessage from './components/layout/StatusMessage';
 import AnswerPage from './pages/AnswerPage';
@@ -14,6 +15,12 @@ import './App.css';
  * Where the student is with the current problem. Each phase has its own page.
  */
 type Phase = 'answering' | 'checking' | 'feedback';
+
+const STEP_FOR_PHASE: Record<Phase, number> = {
+  answering: 1,
+  checking: 2,
+  feedback: 3,
+};
 
 /**
  * The root component. It holds the app's data, talks to the backend (through api.ts), and decides which page to show.
@@ -148,9 +155,13 @@ export default function App() {
       {canUseProblemList && (
         <MenuButton isOpen={false} onClick={() => setIsProblemListOpen(true)} />
       )}
+      <GuideButton />
+
 
       <main className="app__content">{renderPage()}</main>
       
+      <ProgressSteps currentStep={STEP_FOR_PHASE[phase]} />
+
       {canUseProblemList && isProblemListOpen && (
         <ProblemList
           problems={problems}
