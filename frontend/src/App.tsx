@@ -71,8 +71,10 @@ export default function App() {
         setSolvedProblemIds([...solvedProblemIds, problem.id]);
       }
     } catch (error) {
+      const message =
+          error instanceof  Error ? error.message: "Soemthing went wrong when checking your asnwer."
       // Go back to the answer page, keeping the answers, and say what went wrong
-      setSubmitError(`Couldn't check your answer. ${String(error)}`);
+      setSubmitError(message);
       setPhase('answering');
     }
   }

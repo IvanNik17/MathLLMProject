@@ -3,14 +3,31 @@ import { sympyToLatex } from './sympyToLatex';
 
 const API_BASE = '/api';
 
+
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
   const response = await fetch(API_BASE + path, options);
 
   if (!response.ok) {
-    throw new Error(`The server answered ${response.status} ${response.statusText} for ${path}`);
+    let message = `The server answered ${response.status} ${response.statusText} for ${path}`;
+
+    try {
+      const errorData = await response.json();
+
+      if (typeof errorData.detail === 'object' && errorData.detail !== null) {
+        message = errorData.detail.message ?? message;
+      } else if (typeof errorData.detail === 'string') {
+        message = errorData.detail;
+      }
+    } catch {
+      // Keep the fallback message if the response isn't valid JSON.
+    }
+
+    throw new Error(message);
   }
+
   return (await response.json()) as T;
 }
+
 
 /** Gets the list of all problems */
 export async function fetchProblems(): Promise<Problem[]> {
@@ -30,7 +47,7 @@ export async function submitAttempt(problemId: number, answers: string[]): Promi
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       problem_id: problemId,
-      answer: answers.join(', '),
+      answers: answers,
     }),
   });
 
