@@ -32,10 +32,55 @@
   color: var(--color-text-muted);
 }
 
+/* The list of backend steps */
+.checking-page__stages {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 20px;
+}
+
+.checking-page__stage {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.checking-page__stage.is-done {
+  color: var(--color-text-muted);
+}
+
+.checking-page__stage.is-upcoming {
+  color: var(--color-text-faint);
+}
+
+/* The circle in front of each step */
+.checking-page__marker {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--color-border-strong);
+  border-radius: 50%;
+  font-size: 15px;
+}
+
+.checking-page__stage.is-done .checking-page__marker {
+  border-color: var(--color-correct);
+  color: var(--color-correct);
+}
+
+.checking-page__stage.is-current .checking-page__marker {
+  border: none;
+}
+
 /* A ring with one bright segment, spun forever */
 .checking-page__spinner {
-  width: 44px;
-  height: 44px;
+  width: 28px;
+  height: 28px;
   border: 3px solid var(--color-border-strong);
   border-top-color: var(--color-accent);
   border-radius: 50%;

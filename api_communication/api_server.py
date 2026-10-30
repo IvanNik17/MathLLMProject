@@ -1,145 +1,159 @@
+import asyncio
+import logging
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from math_helper.answer_parser import AnswerParser
-from math_helper.math_problem_parser import MathProblemParser
 from fastapi.responses import FileResponse
-from pathlib import Path
-from visualize.manim_renderer import ManimRenderer
+from pydantic import BaseModel
+
+from api_communication import config
+from api_communication.animation_store import AnimationStore
+from api_communication.attempt_jobs import AttemptRunner
+from api_communication.problems import ProblemBook
 from llm.llm_explainer import LLMExplainer
-from math_helper.expression_converter import latex_to_sympy
-import math
-# create a fastAPI application
-app = FastAPI()
+from math_helper.expression_converter import AnswerFormatError, parse_numeric_answer
+from visualize.manim_renderer import ManimRenderer
 
-# create instances of component used by the api
-answer_parser = AnswerParser()
-renderer = ManimRenderer()
-latest_video_path = None
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+log = logging.getLogger("api_server")
 
-llm = LLMExplainer(
-    base_url="https://app-mathllm.cloud.sdu.dk/api",
-    api_key="",
-    model="mistral:latest"
-)
+# Limits on what one request may contain
+MAX_ANSWERS = 10
 
-# Define the data that frontend must send when submitting answers
+
+# These are created when the server starts (see lifespan below)
+problem_book: ProblemBook
+store: AnimationStore
+runner: AttemptRunner
+
+
+async def cleanup_loop():
+    """Deletes old videos every few minutes, for as long as the server runs."""
+    while True:
+        try:
+            store.cleanup(problem_book.all())
+            runner.forget_old_jobs()
+        except Exception:
+            log.exception("Cleanup failed")
+        await asyncio.sleep(config.CLEANUP_EVERY_MINUTES * 60)
+
+
+@asynccontextmanager
+async def lifespan(app):
+    """Runs once at startup (before `yield`) and once at shutdown (after `yield`)."""
+    global problem_book, store, runner
+
+    # A broken problems.json stops the server here, with the reason
+    problem_book = ProblemBook(config.PROBLEMS_FILE)
+    store = AnimationStore(config.DATA_DIR)
+
+    if not config.LLM_API_KEY:
+        log.warning("MATHLLM_API_KEY is not set; feedback will fall back to the engine's short text")
+
+    llm = LLMExplainer(
+        base_url=config.LLM_BASE_URL,
+        api_key=config.LLM_API_KEY,
+        model=config.LLM_MODEL,
+        timeout=config.LLM_TIMEOUT_SECONDS,
+    )
+    runner = AttemptRunner(store, llm, ManimRenderer())
+
+    cleanup_task = asyncio.create_task(cleanup_loop())
+    log.info("Ready: %d problems, data in %s", len(problem_book.all()), config.DATA_DIR)
+
+    yield
+
+    cleanup_task.cancel()
+
+
+app = FastAPI(lifespan=lifespan)
+
+
+# The data the frontend must send when submitting answers
 class AttemptRequest(BaseModel):
     problem_id: int
     answers: list[str]
 
-# The current exercises that can be completed, can easily be expanded.
+
 @app.get("/api/problems")
 async def get_problems():
-    return [
-    {
-        "id": 1,
-        "title": "Problem 1",
-        "equationLatex": "x**2 - 4",
-        "variable": "x"
-    },
-    {
-        "id": 2,
-        "title": "Problem 2",
-        "equationLatex": "x ** 4 - 2",
-        "variable": "x"
-    },
-    {
-        "id": 3,
-        "title": "Problem 3",
-        "equationLatex": "x ** 5 - 2",
-        "variable": "x"
-    }]
-# This is here we handle user answers
-@app.post("/api/attempts")
-async def create_attempt(request: AttemptRequest):
-    global latest_video_path
-    problems = await get_problems()
+    return [problem.to_json() for problem in problem_book.all()]
 
-    # we retrieve all available exercises and run a for loop to find which one is selected
-    problem = next(
-        (p for p in problems if p["id"] == request.problem_id),
-        None
-    )
-# just making sure it works, if no problem is found we put up an error
+
+@app.post("/api/attempts", status_code=202)
+async def create_attempt(request: AttemptRequest):
+    """Reads the answers and starts checking them. Invalid answers are reported right away; otherwise the reply is the attempt's status, which the frontend then polls (GET /api/attempts/{attempt_id})."""
+    problem = problem_book.get(request.problem_id)
     if problem is None:
+        raise HTTPException(status_code=404, detail="Problem not found")
+
+    if not request.answers:
         raise HTTPException(
-            status_code=404,
-            detail="Problem not found"
+            status_code=422,
+            detail={"code": "invalid_answers", "message": "Enter at least one solution."},
+        )
+    if len(request.answers) > MAX_ANSWERS:
+        raise HTTPException(
+            status_code=422,
+            detail={"code": "invalid_answers", "message": f"Enter at most {MAX_ANSWERS} solutions."},
         )
 
     student_roots = []
     answer_errors = []
-
     for index, latex in enumerate(request.answers, start=1):
-        print("Received LaTeX:", latex)
-
         try:
-            expression = latex_to_sympy(latex)
-
-            if expression.is_number is not True:
-                raise ValueError("Answer must be a numeric expression")
-
-            if expression.is_real is not True:
-                answer_errors.append(
-                    f"Answer {index} is not a real number."
-                )
-                continue
-
-            value = float(expression.evalf())
-
-            if not math.isfinite(value):
-                raise ValueError("Answer must be finite")
-
+            # Runs in a thread, so a slow answer can't hold up other students
+            value = await asyncio.to_thread(parse_numeric_answer, latex, problem.variable)
             student_roots.append(value)
-            print("Converted numeric root:", value)
-
-        except (ValueError, TypeError, OverflowError) as exc:
-            answer_errors.append(
-                f"Answer {index} ('{latex}') is invalid: {exc}"
-            )
+        except AnswerFormatError as exc:
+            answer_errors.append(f"Answer {index}: {exc}")
 
     if answer_errors:
         raise HTTPException(
             status_code=422,
             detail={
                 "code": "invalid_answers",
-                "message": "Please correct the following answers:\n"
-                           + "\n".join(answer_errors)
-            }
+                "message": "Please correct the following answers:\n" + "\n".join(answer_errors),
+            },
         )
 
-    # Compare the student's numeric roots with the correct solutions
-    plan = MathProblemParser.parse(
-        problem["equationLatex"],
-        student_roots
-    )
+    if runner.unfinished_count() >= config.MAX_UNFINISHED_ATTEMPTS:
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "code": "busy",
+                "message": "Lots of users are submitting right now. Please try again in a minute.",
+            },
+        )
 
-    # Ask Mistral to generate written feedback
-    plan.explanation_text = llm.explain(plan)
-    # just making sure the backend catches the students answer.
-    print("Student answers:", request.answers)
-    print("Selected explanation type:", plan.explanation_type)
+    job = runner.start(problem, request.answers, student_roots)
+    return job.to_json()
 
-    #generate the manim video using the explanation plan
-    latest_video_path = renderer.render(plan)
 
-    # Send the result back to the frontend as JSON
-    return {
-        "problem_id": request.problem_id,
-        "answer": request.answers,
-        "student_roots": student_roots,
-        "verdict": plan.explanation_type,
-        "explanation_text": plan.explanation_text,
-        "video_url":"/api/video"
-    }
-# Serve the generated video when requested by the frontend
-@app.get("/api/video")
-async def get_video():
-    #Path to the mp4 file.
-    if latest_video_path is None or not latest_video_path.exists():
+@app.get("/api/attempts/{attempt_id}")
+async def get_attempt(attempt_id: str):
+    job = runner.get(attempt_id)
+    if job is None:
         raise HTTPException(
             status_code=404,
-            detail="Video not found"
+            detail="This attempt is no longer known (the server may have restarted). Please submit again.",
         )
-    #Sending the file to the frontend so students can see
-    return FileResponse(path=latest_video_path, media_type="video/mp4")
+    return job.to_json()
+
+
+@app.get("/api/videos/{kind}/{filename}")
+async def get_video(kind: str, filename: str):
+    path = store.video_path(kind, filename)
+    if path is None:
+        raise HTTPException(status_code=404, detail="Video not found")
+    return FileResponse(path=path, media_type="video/mp4")
+
+
+@app.get("/api/health")
+async def health():
+    return {
+        "ok": True,
+        "problems": len(problem_book.all()),
+        "unfinished_attempts": runner.unfinished_count(),
+        "llm_configured": bool(config.LLM_API_KEY),
+    }

@@ -7,3 +7,6 @@ pytest==8.4.2
 uvicorn[standard]
 fastapi
 pydantic
+# SymPy's LaTeX parser needs exactly this version of the ANTLR runtime
+antlr4-python3-runtime==4.11
+python-dotenv

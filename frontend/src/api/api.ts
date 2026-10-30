@@ -1,7 +1,9 @@
-import type { AttemptResult, Problem } from './types';
-import { sympyToLatex } from './sympyToLatex';
+import type { AttemptResult, AttemptStatus, Problem } from './types';
 
 const API_BASE = '/api';
+
+/** How often to ask the backend how an attempt is going, in milliseconds */
+const POLL_INTERVAL = 1000;
 
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
@@ -28,21 +30,24 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
   return (await response.json()) as T;
 }
 
+/** Waits the given number of milliseconds */
+function wait(milliseconds: number) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
 
 /** Gets the list of all problems */
 export async function fetchProblems(): Promise<Problem[]> {
-  const problems = await request<Problem[]>('/problems');
-
-  // TEMPORARY: see sympyToLatex.ts, should probably be done on backend instead
-  return problems.map((problem) => ({
-    ...problem,
-    equationLatex: sympyToLatex(problem.equationLatex),
-  }));
+  return request<Problem[]>('/problems');
 }
 
-/** Sends the student's answers for a problem and returns the backend's verdict. */
-export async function submitAttempt(problemId: number, answers: string[]): Promise<AttemptResult> {
-  const result = await request<AttemptResult>('/attempts', {
+/** Sends the student's answers for a problem and waits for the backend's verdict. */
+export async function submitAttempt(
+  problemId: number,
+  answers: string[],
+  onProgress?: (status: AttemptStatus) => void,
+): Promise<AttemptResult> {
+  let status = await request<AttemptStatus>('/attempts', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -51,5 +56,14 @@ export async function submitAttempt(problemId: number, answers: string[]): Promi
     }),
   });
 
-  return { ...result, video_url: `${result.video_url}?t=${Date.now()}` };
+  while (status.stage !== 'done' && status.stage !== 'failed') {
+    onProgress?.(status);
+    await wait(POLL_INTERVAL);
+    status = await request<AttemptStatus>(`/attempts/${status.attempt_id}`);
+  }
+
+  if (status.stage === 'failed' || !status.result) {
+    throw new Error(status.error ?? 'Something went wrong when checking your answer.');
+  }
+  return status.result;
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchProblems, submitAttempt } from './api/api';
-import type { AttemptResult, Problem } from './api/types';
+import type { AttemptResult, AttemptStatus, Problem } from './api/types';
 import AppHeader from './components/layout/AppHeader';
 import { GuideButton, MenuButton } from './components/layout/CornerButtons';
 import ProgressSteps from './components/layout/ProgressSteps';
@@ -38,6 +38,8 @@ export default function App() {
   const [answers, setAnswers] = useState<string[]>([]);
   const [result, setResult] = useState<AttemptResult | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  // The backend's latest report while it checks the attempt (which step it's on)
+  const [checkingStatus, setCheckingStatus] = useState<AttemptStatus | null>(null);
 
   // Load the problems once, when the app starts ([] = no dependencies).
   useEffect(() => {
@@ -60,10 +62,11 @@ export default function App() {
   async function handleSubmit(problem: Problem, submittedAnswers: string[]) {
     setAnswers(submittedAnswers);
     setSubmitError(null);
+    setCheckingStatus(null);
     setPhase('checking');
 
     try {
-      const attemptResult = await submitAttempt(problem.id, submittedAnswers);
+      const attemptResult = await submitAttempt(problem.id, submittedAnswers, setCheckingStatus);
       setResult(attemptResult);
       setPhase('feedback');
       // Remember correctly solved problems, for the ticks in the problem list.
@@ -123,7 +126,7 @@ export default function App() {
     const problem = problems[problemIndex];
 
     if (phase === 'checking') {
-      return <CheckingPage problem={problem} answers={answers} />;
+      return <CheckingPage problem={problem} answers={answers} status={checkingStatus} />;
     }
     if (phase === 'feedback' && result) {
       return (

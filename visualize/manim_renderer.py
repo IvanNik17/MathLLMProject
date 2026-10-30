@@ -1,21 +1,20 @@
 import subprocess
+import sys
 from pathlib import Path
-import textwrap
 
 from scene_factory import SceneFactory
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+
+class RenderError(RuntimeError):
+    pass
+
 
 class ManimRenderer:
+    """Renders an ExplanationPlan to an mp4. Every render happens in its own folder, so multiple renders can happen at once without interfering with each other."""
 
-
-    def __init__(self):
-
-        self.output_dir = Path(
-            "media/videos"
-        )
-
-
-    def create_scene_file(self, scene_class, plan):
+    def create_scene_file(self, scene_class, plan, file):
 
         template = "\n".join([
             f"from visualize.scenes.{scene_class.__module__.split('.')[-1]} import {scene_class.__name__}",
@@ -39,64 +38,54 @@ class ManimRenderer:
             "    pass",
         ])
 
-        file = Path("generated_scene.py")
-        file.write_text(template,encoding="utf-8")
-
+        file.write_text(template, encoding="utf-8")
         return file
 
-
-    def render(self, plan):
+    def render(self, plan, work_dir=None, timeout=None):
+        """Renders the plan and returns the path of the finished mp4."""
+        work_dir = Path(work_dir) if work_dir else PROJECT_ROOT / "media" / "test_render"
+        work_dir.mkdir(parents=True, exist_ok=True)
 
         scene_class = SceneFactory.get_scene(plan)
-
-        generated_file = self.create_scene_file(
-            scene_class,
-            plan
-        )
-
-
-        print("Generated scene:")
-        print(generated_file.read_text())
-
+        scene_file = self.create_scene_file(scene_class, plan, work_dir / "generated_scene.py")
+        log_file = work_dir / "manim.log"
 
         command = [
-            "python",
-            "-m",
-            "manim",
+            # sys.executable is the Python running this code, so Manim comes from the same environment as the server
+            sys.executable, "-m", "manim", "render",
             "-ql",
-            str(generated_file),
-            "GeneratedScene"
+            "--media_dir", str(work_dir / "media"),
+            "--progress_bar", "none",
+            str(scene_file),
+            "GeneratedScene",
         ]
 
+        try:
+            result = subprocess.run(
+                command,
+                cwd=PROJECT_ROOT,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                timeout=timeout,
+            )
+        except subprocess.TimeoutExpired as exc:
+            raise RenderError(f"Manim took longer than {timeout} seconds and was stopped") from exc
 
-        print("Running:")
-        print(" ".join(command))
-
-
-        result = subprocess.run(
-            command,
-            text=True
-        )
+        log_file.write_text(result.stdout + "\n" + result.stderr, encoding="utf-8")
 
         if result.returncode != 0:
-            print("Manim stdout:")
-            print(result.stdout)
-
-            print("Manim stderr:")
-            print(result.stderr)
-
-            raise RuntimeError(
-                f"Manim failed with exit code {result.returncode}"
+            last_lines = "\n".join(result.stderr.strip().splitlines()[-15:])
+            raise RenderError(
+                f"Manim failed with exit code {result.returncode}. Full log: {log_file}\n{last_lines}"
             )
 
+        videos = [
+            path for path in (work_dir / "media").rglob("GeneratedScene.mp4")
+            if "partial_movie_files" not in path.parts
+        ]
+        if not videos:
+            raise RenderError(f"Manim finished but no video was found. Full log: {log_file}")
 
-
-        video_path = Path("media/videos/generated_scene/480p15/GeneratedScene.mp4")
-
-        if not video_path.exists():
-            raise FileNotFoundError(
-                f"Rendered video not found: {video_path}"
-            )
-
-        return video_path
-
+        return videos[0]

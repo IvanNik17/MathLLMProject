@@ -22,7 +22,8 @@ export default function FeedbackPage({ problem, answers, result, onTryAgain, onN
 
       <div className="feedback-page__body">
         <div className="feedback-page__video-frame">
-          {videoFailed ? (
+          {/* video_url is null when the backend couldn't make the animation */}
+          {videoFailed || !result.video_url ? (
             <p className="feedback-page__video-error">The explanation video couldn't be loaded.</p>
           ) : (
             // muted is required for autoPlay in most browsers (the videos have no sound anyway)
