@@ -5,27 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7d8b666-ccf5-4350-8608-be04719b292d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/layout/DriverTutorial.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/layout/driver.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api_communication/api_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/api_server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/answer/AnswerInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/answer/AnswerInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/answer/ShortcutButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/answer/ShortcutButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/layout/CornerButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/layout/CornerButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/layout/ProgressSteps.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/layout/ProgressSteps.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/math/MathField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/math/MathField.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/AnswerPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/AnswerPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/math_helper/expression_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/math_helper/expression_converter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/videos/generated_scene/480p15/GeneratedScene.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/media/videos/generated_scene/480p15/GeneratedScene.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/videos/generated_scene/480p15/partial_movie_files/GeneratedScene/partial_movie_file_list.txt" beforeDir="false" afterPath="$PROJECT_DIR$/media/videos/generated_scene/480p15/partial_movie_files/GeneratedScene/partial_movie_file_list.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualize/manim_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize/manim_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualize/scenes/base_math_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize/scenes/base_math_scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualize/scenes/correct_answer_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize/scenes/correct_answer_scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualize/scenes/extra_solution_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize/scenes/extra_solution_scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualize/scenes/missed_solution_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize/scenes/missed_solution_scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualize/scenes/no_real_solution_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize/scenes/no_real_solution_scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualize/scenes/wrong_solution_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize/scenes/wrong_solution_scene.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,33 +101,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.latex_to_sympy.executor": "Run",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "frontend",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/Alexander/Desktop/MathLLMProject/frontend/src/components/layout",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "C:\\Users\\Alexander\\Desktop\\MathLLMProject\\frontend\\node_modules\\typescript\\lib"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.latex_to_sympy.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;frontend&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Alexander/Desktop/MathLLMProject/frontend/src/components/layout&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Alexander\\Desktop\\MathLLMProject\\frontend\\node_modules\\typescript\\lib&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Alexander\Desktop\MathLLMProject\frontend\src\components\layout" />
@@ -224,7 +204,7 @@
       <workItem from="1793450516110" duration="92000" />
       <workItem from="1793450654247" duration="6963000" />
       <workItem from="1793649671737" duration="214000" />
-      <workItem from="1793649895617" duration="394000" />
+      <workItem from="1793649895617" duration="832000" />
     </task>
     <servers />
   </component>

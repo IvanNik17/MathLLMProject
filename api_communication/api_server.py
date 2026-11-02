@@ -20,7 +20,7 @@ latest_video_path = None
 
 llm = LLMExplainer(
     base_url="https://app-mathllm.cloud.sdu.dk/api",
-    api_key="sk-030c75029f1746569accd95bff05142b",
+    api_key="",
     model="mistral:latest"
 )
 
