@@ -8,6 +8,8 @@ from visualize.manim_renderer import ManimRenderer
 from llm.llm_explainer import LLMExplainer
 from math_helper.expression_converter import latex_to_sympy
 import math
+from sympy import N
+
 # create a fastAPI application
 app = FastAPI()
 
@@ -18,7 +20,7 @@ latest_video_path = None
 
 llm = LLMExplainer(
     base_url="https://app-mathllm.cloud.sdu.dk/api",
-    api_key="",
+    api_key="sk-030c75029f1746569accd95bff05142b",
     model="mistral:latest"
 )
 
@@ -76,14 +78,12 @@ async def create_attempt(request: AttemptRequest):
         try:
             expression = latex_to_sympy(latex)
 
-            if expression.is_number is not True:
-                raise ValueError("Answer must be a numeric expression")
+            value_expr = expression.evalf()
 
-            if expression.is_real is not True:
-                answer_errors.append(
-                    f"Answer {index} is not a real number."
-                )
-                continue
+            value = float(value_expr)
+
+            if not math.isfinite(value):
+                raise ValueError("Answer must be finite")
 
             value = float(expression.evalf())
 

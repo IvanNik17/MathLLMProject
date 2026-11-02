@@ -10,7 +10,7 @@ type ProgressStepsProps = {
 
 export default function ProgressSteps({ currentStep }: ProgressStepsProps) {
   return (
-    <nav className="progress-steps" aria-label="Progress">
+    <nav className="progress-steps" aria-label="Progress" >
       {STEPS.map((name, index) => {
         const stepNumber = index + 1;
         const status =

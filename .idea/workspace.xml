@@ -5,22 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7d8b666-ccf5-4350-8608-be04719b292d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/layout/DriverTutorial.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/layout/driver.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api_communication/api_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/api_server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/answer/AnswerInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/answer/AnswerInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/answer/ShortcutButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/answer/ShortcutButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/layout/CornerButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/layout/CornerButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/layout/ProgressSteps.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/layout/ProgressSteps.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/math/MathField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/math/MathField.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/AnswerPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/AnswerPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/math_helper/expression_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/math_helper/expression_converter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/media/videos/generated_scene/480p15/GeneratedScene.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/media/videos/generated_scene/480p15/GeneratedScene.mp4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/media/videos/generated_scene/480p15/partial_movie_files/GeneratedScene/partial_movie_file_list.txt" beforeDir="false" afterPath="$PROJECT_DIR$/media/videos/generated_scene/480p15/partial_movie_files/GeneratedScene/partial_movie_file_list.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualize/manim_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize/manim_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualize/scenes/base_math_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize/scenes/base_math_scene.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualize/scenes/correct_answer_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize/scenes/correct_answer_scene.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualize/scenes/extra_solution_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize/scenes/extra_solution_scene.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualize/scenes/missed_solution_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize/scenes/missed_solution_scene.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualize/scenes/no_real_solution_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize/scenes/no_real_solution_scene.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualize/scenes/wrong_solution_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize/scenes/wrong_solution_scene.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="306" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -33,65 +52,65 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0000000000000406" />
-      <entry key="S60" value="1.0000013919309039" />
-      <entry key="M2" value="1.0095524317291473" />
-      <entry key="M5" value="3.313121614522312" />
-      <entry key="M10" value="19.594323505336135" />
-      <entry key="M15" value="42.589980924116986" />
-      <entry key="M30" value="122.49960120559992" />
-      <entry key="H1" value="293.3744847098347" />
-      <entry key="H2" value="538.1518783942022" />
-      <entry key="H4" value="770.0070094630863" />
-      <entry key="D1" value="1071.5190657636067" />
-      <entry key="W1" value="1137.5078543617126" />
+      <entry key="MS100" value="1.1037542915973515" />
+      <entry key="MS500" value="3.2477624490770953" />
+      <entry key="S2" value="5.642750840364706" />
+      <entry key="S5" value="6.410301880988585" />
+      <entry key="S10" value="6.804237022152449" />
+      <entry key="S30" value="16.671619545214536" />
+      <entry key="S60" value="38.658402858007115" />
+      <entry key="M2" value="67.13187774872591" />
+      <entry key="M5" value="118.17861767181486" />
+      <entry key="M10" value="176.9732462518491" />
+      <entry key="M15" value="218.9283047878276" />
+      <entry key="M30" value="319.54811060031085" />
+      <entry key="H1" value="506.83275246052494" />
+      <entry key="H2" value="833.2214450006355" />
+      <entry key="H4" value="1251.8623347536354" />
+      <entry key="D1" value="1983.8414304262053" />
+      <entry key="W1" value="2173.8049222212653" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="1.1521733882788271E-144" />
-      <entry key="S10" value="1.1329372620439817E-72" />
-      <entry key="S30" value="1.4176161486413199E-24" />
-      <entry key="S60" value="1.639519229787613E-12" />
-      <entry key="M2" value="1.7982067973992795E-6" />
-      <entry key="M5" value="0.007662598413993" />
-      <entry key="M10" value="0.13255567919660133" />
-      <entry key="M15" value="0.3755713423042895" />
-      <entry key="M30" value="1.4083641474513977" />
-      <entry key="H1" value="3.890468642652264" />
-      <entry key="H2" value="8.04105153306775" />
-      <entry key="H4" value="12.575287313598036" />
-      <entry key="D1" value="19.18933841630334" />
-      <entry key="W1" value="20.728836164792288" />
+      <entry key="S2" value="2.234314264888102E-99" />
+      <entry key="S5" value="3.6014581249394277E-40" />
+      <entry key="S10" value="2.23173139262274E-20" />
+      <entry key="S30" value="4.2789671585826165E-7" />
+      <entry key="S60" value="0.0010449193055850586" />
+      <entry key="M2" value="0.06394200043493144" />
+      <entry key="M5" value="1.0445477268560786" />
+      <entry key="M10" value="3.228203731214661" />
+      <entry key="M15" value="5.1823213899832865" />
+      <entry key="M30" value="10.766850386990356" />
+      <entry key="H1" value="21.450357300317297" />
+      <entry key="H2" value="36.45855547800231" />
+      <entry key="H4" value="51.882135901784125" />
+      <entry key="D1" value="75.24198847807136" />
+      <entry key="W1" value="80.97626731024194" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.26980705912610675" />
-      <entry key="MS500" value="0.7695036100804312" />
-      <entry key="S2" value="0.9365967909046145" />
-      <entry key="S5" value="0.9741393035654581" />
-      <entry key="S10" value="0.9869849560988546" />
-      <entry key="S30" value="0.9956426934890763" />
-      <entry key="S60" value="0.9978203566795346" />
-      <entry key="M2" value="1.0084535340110463" />
-      <entry key="M5" value="3.3195406837359505" />
-      <entry key="M10" value="19.72363732639935" />
-      <entry key="M15" value="42.960883338382324" />
-      <entry key="M30" value="123.90109556597125" />
-      <entry key="H1" value="297.2565467308021" />
-      <entry key="H2" value="546.1847975083361" />
-      <entry key="H4" value="782.5761705445631" />
-      <entry key="D1" value="1090.7068977126123" />
-      <entry key="W1" value="1158.2364594365704" />
+      <entry key="MS100" value="0.2771400287332719" />
+      <entry key="MS500" value="2.942953191147631" />
+      <entry key="S2" value="5.553978988047753" />
+      <entry key="S5" value="6.373585758851116" />
+      <entry key="S10" value="6.785640780691244" />
+      <entry key="S30" value="16.663963102178876" />
+      <entry key="S60" value="38.65127547122869" />
+      <entry key="M2" value="67.18423120679151" />
+      <entry key="M5" value="119.20178928923345" />
+      <entry key="M10" value="180.1761703470183" />
+      <entry key="M15" value="224.08578684613838" />
+      <entry key="M30" value="330.2910976991004" />
+      <entry key="H1" value="528.2599185838588" />
+      <entry key="H2" value="869.6598421590138" />
+      <entry key="H4" value="1303.7295246756878" />
+      <entry key="D1" value="2059.0795901434326" />
+      <entry key="W1" value="2254.7805937079543" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1,
@@ -113,8 +132,9 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "LatexConverter",
+    "git-widget-placeholder": "frontend",
     "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/Users/Alexander/Desktop/MathLLMProject/frontend/src/components/layout",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.jshint": "true",
     "node.js.detected.package.tslint": "true",
@@ -123,11 +143,15 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
     "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PyCharm 2026.2.2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external"
+    "ts.external.directory.path": "C:\\Users\\Alexander\\Desktop\\MathLLMProject\\frontend\\node_modules\\typescript\\lib"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Alexander\Desktop\MathLLMProject\frontend\src\components\layout" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Alexander\Desktop\MathLLMProject" />
     </key>
@@ -163,8 +187,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-PY-262.10968.92" />
-        <option value="bundled-python-sdk-73a66231627c-5bd6d13a2a75-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-262.10968.92" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-PY-262.11879.98" />
+        <option value="bundled-python-sdk-ebb3072d7bdf-5bd6d13a2a75-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-262.11879.98" />
       </set>
     </attachedChunks>
   </component>
@@ -191,6 +215,16 @@
       <workItem from="1792839516600" duration="100000" />
       <workItem from="1792839644443" duration="3125000" />
       <workItem from="1792868662532" duration="16000" />
+      <workItem from="1793095275989" duration="594000" />
+      <workItem from="1793280065483" duration="3167000" />
+      <workItem from="1793349159837" duration="38000" />
+      <workItem from="1793446047979" duration="3567000" />
+      <workItem from="1793449636602" duration="284000" />
+      <workItem from="1793449929839" duration="417000" />
+      <workItem from="1793450516110" duration="92000" />
+      <workItem from="1793450654247" duration="6963000" />
+      <workItem from="1793649671737" duration="214000" />
+      <workItem from="1793649895617" duration="394000" />
     </task>
     <servers />
   </component>

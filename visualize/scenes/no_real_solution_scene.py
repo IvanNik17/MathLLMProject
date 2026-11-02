@@ -11,7 +11,8 @@ from math_helper.expression_evaluator import ExpressionEvaluator
 
 from visualize.manim_utils import (
     create_explanation_text,
-    create_label_text
+    create_label_text,
+    format_number,
 )
 
 
@@ -84,9 +85,8 @@ class NoRealSolutionScene(BaseMathScene):
             color=YELLOW
         )
 
-
         minimum_label = create_label_text(
-            f"Minimum: y={min_y:.2f}"
+            f"Minimum: y={format_number(min_y)}"
         )
 
 

@@ -68,11 +68,11 @@ export default function AnswerInput({ variable, answers, onAnswersChange }: Answ
         ))}
       </div>
 
-      <button type="button" className="answer-card__add" onClick={addSolution}>
+      <button type="button" className="answer-card__add" onClick={addSolution} id="add-solution">
         + Add a solution
       </button>
 
-      <div className="answer-card__toolbar">
+      <div className="answer-card__toolbar" >
         <ShortcutButtons onInsert={insertShortcut} />
         <button type="button" className="answer-card__clear" onClick={clearAll}>
           Clear

@@ -7,7 +7,7 @@ type ShortcutButtonsProps = {
 
 export default function ShortcutButtons({ onInsert }: ShortcutButtonsProps) {
   return (
-    <div className="shortcut-buttons" role="toolbar" aria-label="Math shortcuts">
+    <div className="shortcut-buttons" role="toolbar" aria-label="Math shortcuts" id="shortcuts">
       {MATH_SHORTCUTS.map((shortcut) => (
         <button
           key={shortcut.id}

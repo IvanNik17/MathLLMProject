@@ -262,3 +262,6 @@ def calculate_step(value_range):
         return 20
 
     return 50
+
+def format_number(value):
+    return f"{value:.3f}".rstrip("0").rstrip(".")

@@ -1,0 +1,51 @@
+/* Main tutorial popup */
+.driver-popover {
+    background-color: rgba(19, 30, 36, 0.94);
+    color: #ffffff;
+    border: 1px solid rgba(25, 213, 229, 0.45);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Popup title */
+.driver-popover-title {
+    color: #19D5E5;
+    font-weight: 700;
+}
+
+/* Description */
+.driver-popover-description {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Progress indicator */
+.driver-popover-progress-text {
+    color: rgba(25, 213, 229, 0.8);
+}
+
+/* Navigation buttons */
+.driver-popover-prev-btn,
+.driver-popover-next-btn {
+    background-color: rgba(25, 213, 229, 0.9);
+    color: #101820;
+    border: none;
+    border-radius: 6px;
+    text-shadow: none;
+}
+
+/* Button hover */
+.driver-popover-prev-btn:hover,
+.driver-popover-next-btn:hover {
+    background-color: #19D5E5;
+    color: #101820;
+}
+
+/* Close button */
+.driver-popover-close-btn {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.driver-popover-close-btn:hover {
+    color: #19D5E5;
+}

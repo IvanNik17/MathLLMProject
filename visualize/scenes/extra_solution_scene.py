@@ -8,7 +8,7 @@ sys.path.append(
 )
 
 from scenes.base_math_scene import BaseMathScene
-from visualize.manim_utils import create_explanation_text
+from visualize.manim_utils import create_explanation_text, format_number
 
 
 class ExtraSolutionScene(BaseMathScene):
@@ -51,7 +51,8 @@ class ExtraSolutionScene(BaseMathScene):
             extra_x, y_value = extra_points[0]
 
             explanation = create_explanation_text(
-                f"x = {extra_x:g} gives y = {y_value:g}\n"
+                f"x = {format_number(extra_x)} gives "
+                f"y = {format_number(y_value)}\n"
                 f"{plan.explanation_text}"
             )
 

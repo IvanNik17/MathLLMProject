@@ -67,5 +67,5 @@ export default function MathField({
     }
   }, [value]);
 
-  return <math-field ref={fieldRef} className="math-field" aria-label={ariaLabel} />;
+  return <math-field ref={fieldRef} className="math-field" aria-label={ariaLabel} id="answer-write" />;
 }

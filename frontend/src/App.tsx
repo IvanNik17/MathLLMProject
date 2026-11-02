@@ -27,6 +27,7 @@ const STEP_FOR_PHASE: Record<Phase, number> = {
  */
 export default function App() {
   // The problems, loaded from the backend
+  const [tutorialActive, setTutorialActive] = useState(false);
   const [problems, setProblems] = useState<Problem[] | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [problemIndex, setProblemIndex] = useState(0);
@@ -151,13 +152,13 @@ export default function App() {
   const canUseProblemList = phase === 'answering' && problems !== null && problems.length > 0;
   
   return (
-    <div className="app">
+    <div className="app" inert={tutorialActive}>
       <AppHeader />
 
       {canUseProblemList && (
         <MenuButton isOpen={false} onClick={() => setIsProblemListOpen(true)} />
       )}
-      <GuideButton />
+      <GuideButton setTutorialActive={setTutorialActive} />
 
 
       <main className="app__content">{renderPage()}</main>

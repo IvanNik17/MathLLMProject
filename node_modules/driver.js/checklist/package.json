@@ -1,0 +1,8 @@
+{
+  "main": "../dist/checklist.cjs",
+  "module": "../dist/checklist.mjs",
+  "types": "../dist/checklist.d.ts",
+  "sideEffects": [
+    "**/*.css"
+  ]
+}

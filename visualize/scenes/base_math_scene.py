@@ -6,7 +6,8 @@ from visualize.manim_utils import create_root_marker
 
 from visualize.manim_utils import (
     create_dynamic_axes,
-    create_scene_title
+    create_scene_title,
+    format_number
 )
 
 from visualize.graph_builder import GraphBuilder
@@ -31,8 +32,13 @@ class BaseMathScene(Scene):
 
         plan = self.get_plan()
 
+        formatted_roots = ", ".join(
+            format_number(root)
+            for root in plan.student_roots()
+        )
+
         title = create_scene_title(
-            f"Student answer: {plan.student_roots()}"
+            f"Student answer: {formatted_roots}"
         )
 
 
@@ -82,7 +88,7 @@ class BaseMathScene(Scene):
                 axes,
                 root,
                 color=RED,
-                label=f"Student: x={root:g}"
+                label=f"Student: x={format_number(root)}"
             )
 
             self.play(
@@ -100,7 +106,7 @@ class BaseMathScene(Scene):
                 axes,
                 root,
                 color=GREEN,
-                label=f"Correct: x={root:g}"
+                label=f"Correct: x={format_number(root)}"
             )
 
             self.play(
