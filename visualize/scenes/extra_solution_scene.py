@@ -51,8 +51,7 @@ class ExtraSolutionScene(BaseMathScene):
             extra_x, y_value = extra_points[0]
 
             explanation = create_explanation_text(
-                f"x = {extra_x:g} gives y = {y_value:g}\n"
-                f"{plan.explanation_text}"
+                f"x = {extra_x:g} gives y = {y_value:g}"
             )
 
             explanation.to_edge(

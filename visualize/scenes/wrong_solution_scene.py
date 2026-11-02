@@ -152,18 +152,8 @@ class WrongSolutionScene(BaseMathScene):
         # Stage 5: Reveal correct root
         # =================================
 
-        correction = create_explanation_text(
-            plan.explanation_text
-        )
-
-        correction.to_corner(
-            DL
-        )
-
-
         self.play(
-            FadeOut(investigate_text),
-            Write(correction)
+            FadeOut(investigate_text)
         )
 
 
@@ -193,10 +183,7 @@ class WrongSolutionScene(BaseMathScene):
             )
 
             self.play(
-                Transform(
-                    correction,
-                    summary
-                )
+                Write(summary)
             )
 
         self.wait(3)
