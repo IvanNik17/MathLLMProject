@@ -67,6 +67,8 @@ and in another terminal the frontend:
     cd frontend
     npm run dev
 
+Without Vite: run `npm run build` in `frontend/` once, then the API server serves the built page from `frontend/dist`.
+
 `POST /api/attempts` checks the answers can be read and replies at once with an attempt id; the work then happens in the background, and the frontend polls `GET /api/attempts/<id>` to show which stage it is on.
 
 Rendered videos go in `data/` (ignored by git). Videos for wrong answers are deleted after a few hours; the video and feedback for a correct answer are stored once per problem and reused. 

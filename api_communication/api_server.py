@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from api_communication import config
@@ -157,3 +158,25 @@ async def health():
         "unfinished_attempts": runner.unfinished_count(),
         "llm_configured": bool(config.LLM_API_KEY),
     }
+
+
+# --- The built frontend -------------------------------------------------------
+# This must come after every /api route. A mount at "/" answers any path no route above has claimed.
+
+class FrontendFiles(StaticFiles):
+    """Serves frontend/dist, telling browsers how long they may keep each file."""
+
+    async def get_response(self, path, scope):
+        response = await super().get_response(path, scope)
+        if path.startswith("assets/"):
+            response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+        else:
+            response.headers["Cache-Control"] = "no-cache"
+        return response
+
+
+if (config.FRONTEND_DIST / "index.html").exists():
+    # html=True: a request for "/" gets index.html
+    app.mount("/", FrontendFiles(directory=config.FRONTEND_DIST, html=True), name="frontend")
+else:
+    log.info("No built frontend at %s; serving the API only (use `npm run dev` for the frontend)", config.FRONTEND_DIST)

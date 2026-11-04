@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Shell scripts run on Linux (the Spark), where a Windows line ending breaks them
+*.sh text eol=lf

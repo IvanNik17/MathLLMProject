@@ -1,0 +1,32 @@
+// The container MathWiz runs in on the AAU Spark. 
+{
+    "name": "mathwiz",
+
+    "build": {
+        "dockerfile": "Dockerfile",
+        // The Dockerfile copies nothing from the repo, so only this folder needs sending to Docker.
+        "context": "."
+    },
+
+    // Put the repo folder on the Spark's disk at /workspace. Everything that must survive a rebuild (code, .venv, frontend/dist, data/) lives there. 
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    "workspaceFolder": "/workspace",
+
+    "runArgs": [
+        // Publish the server on the Spark's port 10100 
+        "-p", "10100:10100"
+    ],
+
+    // By default VS Code stops the container when its window closes, taking the server with it.
+    "shutdownAction": "none",
+
+    "customizations": {
+        "vscode": {
+            "extensions": ["ms-python.python"],
+            "settings": {
+                // The repo's .vscode/settings.json picks conda, which isn't in the container
+                "python.defaultInterpreterPath": "/workspace/.venv/bin/python"
+            }
+        }
+    }
+}

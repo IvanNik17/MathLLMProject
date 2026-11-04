@@ -30,6 +30,8 @@ LLM_TIMEOUT_SECONDS = _int("MATHLLM_LLM_TIMEOUT", 60)
 PROBLEMS_FILE = _path("MATHLLM_PROBLEMS_FILE", "content/problems.json")
 # Everything the server writes
 DATA_DIR = _path("MATHLLM_DATA_DIR", "data")
+# The built frontend
+FRONTEND_DIST = _path("MATHLLM_FRONTEND_DIST", "frontend/dist")
 
 # --- How much work runs at once ---------------------------------------------
 # Manim uses one CPU core per render, and a render takes 10-60 seconds.
