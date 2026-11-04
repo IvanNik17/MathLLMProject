@@ -1,0 +1,128 @@
+/* The backdrop covers the whole window, behind the panel */
+.problem-list__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: var(--color-backdrop);
+  animation: problem-list-fade-in 0.2s ease-out;
+}
+
+/* The panel: full height, fixed to the left edge of the window */
+.problem-list {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 11; /* above the backdrop */
+  display: flex;
+  flex-direction: column;
+  width: min(440px, 100vw - 110px); /* leaves room for the toggle button on small screens */
+  padding: 44px 36px;
+  background: var(--color-panel);
+  border-right: 1px solid var(--color-border);
+  animation: problem-list-slide-in 0.2s ease-out;
+}
+
+.problem-list__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding: 0 14px;
+}
+
+.problem-list__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+}
+
+.problem-list__progress {
+  font-size: 20px;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+/* The list scrolls if there are more problems than fit */
+.problem-list__items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+/* One problem row */
+
+.problem-list__item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  min-height: 56px;
+  padding: 6px 14px;
+  text-align: left;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-small);
+}
+
+.problem-list__item:hover {
+  background: var(--color-surface-raised);
+}
+
+.problem-list__item.is-current {
+  background: var(--color-surface-raised);
+  border-color: var(--color-accent-soft);
+}
+
+.problem-list__number {
+  width: 18px;
+  flex-shrink: 0;
+  font-size: 18px;
+  color: var(--color-text-muted);
+}
+
+.problem-list__math {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 26px;
+}
+
+.problem-list__solved {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-correct);
+  background: color-mix(in srgb, var(--color-correct) 20%, transparent);
+  border-radius: 50%;
+}
+
+/* The menu button, attached to the panel's right edge */
+.problem-list__toggle {
+  left: 100%;
+  background: var(--color-panel);
+}
+
+/* Opening animations */
+
+@keyframes problem-list-slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes problem-list-fade-in {
+  from {
+    opacity: 0;
+  }
+}

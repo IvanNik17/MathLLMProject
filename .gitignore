@@ -165,3 +165,6 @@ generated_scene.py
 
 # Manim rendered output
 media/
+
+# Server output
+data/

@@ -1,0 +1,22 @@
+.status-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20vh;
+  text-align: center;
+}
+
+.status-message__title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.status-message__text {
+  max-width: 520px;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}

@@ -1,0 +1,36 @@
+.attempt-summary {
+  display: flex;
+  gap: 32px 120px;
+}
+
+.attempt-summary--row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.attempt-summary--column {
+  flex-direction: column;
+}
+
+.attempt-summary__item {
+  display: flex;
+  gap: 16px;
+}
+
+.attempt-summary--row .attempt-summary__item {
+  align-items: baseline;
+}
+
+.attempt-summary--column .attempt-summary__item {
+  flex-direction: column;
+}
+
+.attempt-summary__label {
+  font-size: 18px;
+  color: var(--color-text-muted);
+}
+
+.attempt-summary__math {
+  font-size: 44px;
+}

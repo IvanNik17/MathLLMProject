@@ -7,12 +7,15 @@ class LLMExplainer:
         self,
         base_url,
         api_key,
-        model="mistral:latest"
+        model="mistral:latest",
+        timeout=60
     ):
 
         self.client = OpenAI(
             base_url=base_url,
-            api_key=api_key
+            api_key=api_key,
+            timeout=timeout,
+            max_retries=1
         )
 
         self.model = model

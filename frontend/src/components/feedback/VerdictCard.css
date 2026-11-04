@@ -1,0 +1,85 @@
+.verdict-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px 16px 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-medium);
+}
+
+.verdict-card__header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.verdict-card__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--tone-color);
+  background: color-mix(in srgb, var(--tone-color) 15%, transparent);
+  border-radius: 50%;
+}
+
+.verdict-card__title {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--tone-color);
+}
+
+.verdict-card__subtitle {
+  margin: 2px 0 0;
+  font-size: 20px;
+}
+
+.verdict-card__feedback {
+  padding: 0 4px;
+}
+
+.verdict-card__label {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.verdict-card__explanation {
+  max-height: 300px;
+  overflow-y: auto;
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.55;
+  white-space: pre-line;
+  color: var(--color-text-muted);
+}
+
+.verdict-card__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.verdict-card__actions .button {
+  padding: 0 12px;
+}
+
+
+.verdict-card--correct {
+  --tone-color: var(--color-correct);
+}
+
+.verdict-card--partial {
+  --tone-color: var(--color-partial);
+}
+
+.verdict-card--incorrect {
+  --tone-color: var(--color-incorrect);
+}

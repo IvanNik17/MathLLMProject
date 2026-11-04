@@ -1,0 +1,38 @@
+/*
+ * Styling for MathLive's <math-field>
+ * The --variables below are MathLive's own styling hooks
+ * ::part(...) reaches inside the element to hide built-in buttons we don't use.
+ */
+
+.math-field {
+  display: inline-block;
+  min-width: 60px;
+  max-width: 100%;
+  min-height: 60px;
+  padding: 6px 12px;
+  font-size: 36px;
+  color: var(--color-text);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-accent-soft);
+  border-radius: var(--radius-small);
+  transition: border-color 0.15s, box-shadow 0.15s;
+
+  --caret-color: var(--color-accent);
+  --selection-background-color: var(--color-accent-soft);
+  --selection-color: var(--color-text);
+  --contains-highlight-background-color: transparent;
+  --placeholder-color: var(--color-accent);
+  --box-placeholder-color: var(--color-accent);
+  --smart-fence-color: var(--color-text-faint);
+}
+
+.math-field:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(36, 226, 255, 0.12);
+  outline: none;
+}
+
+.math-field::part(menu-toggle),
+.math-field::part(virtual-keyboard-toggle) {
+  display: none;
+}

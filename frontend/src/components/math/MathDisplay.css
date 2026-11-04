@@ -1,0 +1,10 @@
+.math-display {
+  display: inline-block;
+  line-height: 1;
+  color: var(--color-text);
+}
+
+/* KaTeX sizes its output relative to the surrounding font size; this bumps it slightly */
+.math-display .katex {
+  font-size: 1.1em;
+}

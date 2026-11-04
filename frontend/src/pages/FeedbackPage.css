@@ -1,0 +1,39 @@
+.feedback-page {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  margin-top: 40px;
+}
+
+/* Video on the left, verdict card on the right (stacked on narrow screens) */
+.feedback-page__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  align-items: start;
+  gap: 40px;
+}
+
+@media (max-width: 1000px) {
+  .feedback-page__body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feedback-page__video-frame {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+}
+
+.feedback-page__video {
+  width: 100%;
+  height: 100%;
+}
+
+.feedback-page__video-error {
+  color: var(--color-text-muted);
+}
