@@ -247,8 +247,7 @@ class MathProblemParser:
         correct_roots, correct_period = MathEngine.solve_periodic_equation(expression)
 
         if correct_period is None or correct_period == 0:
-            print("Error: equation is aperiodic!")
-            return None #TODO: Find out what to do in this case
+            return MathProblemParser.parse(expression=expression, student_roots=student_roots)
 
         #Wrong roots and points
         wrong_roots = [
