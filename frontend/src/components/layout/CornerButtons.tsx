@@ -1,4 +1,5 @@
 import './CornerButtons.css';
+import {startTutorial} from "./DriverTutorial"
 
 // The two buttons in the top corners of the page
 
@@ -13,6 +14,7 @@ type MenuButtonProps = {
 export function MenuButton({ isOpen, onClick, className = '' }: MenuButtonProps) {
   return (
     <button
+        id="problem-list"
       type="button"
       className={`menu-button ${className}`}
       aria-label={isOpen ? 'Close problem list' : 'Open problem list'}
@@ -35,12 +37,22 @@ export function MenuButton({ isOpen, onClick, className = '' }: MenuButtonProps)
   );
 }
 
-/** Top-right: will open a guide walkthrough. VISUAL ONLY for now. */
-export function GuideButton() {
+
+type GuideButtonProps = {
+  setTutorialActive: (active: boolean) => void;
+};
+
+/** Top-right: will open a guide walkthrough. */
+export function GuideButton({ setTutorialActive }: GuideButtonProps) {
   return (
-    <button type="button" className="guide-button" aria-label="Guide">
-      <span className="guide-button__box" aria-hidden="true">?</span>
-      <span className="guide-button__label">Guide</span>
-    </button>
+      <button
+          type="button"
+          className="guide-button"
+          aria-label="Guide"
+          onClick={() => startTutorial(setTutorialActive)}
+      >
+        <span className="guide-button__box" aria-hidden="true">?</span>
+        <span className="guide-button__label">Guide</span>
+      </button>
   );
 }

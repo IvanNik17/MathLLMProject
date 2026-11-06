@@ -11,7 +11,7 @@ sys.path.append(
 
 from scenes.base_math_scene import BaseMathScene
 
-from visualize.manim_utils import create_explanation_text
+from visualize.manim_utils import create_explanation_text, format_number
 
 class CorrectAnswerScene(BaseMathScene):
 
@@ -84,8 +84,13 @@ class CorrectAnswerScene(BaseMathScene):
         # Stage 4: Final confirmation
         # ==============================
 
+        formatted_roots = ", ".join(
+            format_number(root)
+            for root in correct_roots
+        )
+
         final_text = create_explanation_text(
-            f"Correct! Solutions: {correct_roots}"
+            f"Correct! Solutions: {formatted_roots}"
         )
 
         final_text.to_edge(DOWN)

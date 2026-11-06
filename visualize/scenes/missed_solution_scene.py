@@ -10,7 +10,8 @@ sys.path.append(
 from scenes.base_math_scene import BaseMathScene
 from visualize.manim_utils import (
     create_root_marker,
-    create_explanation_text
+    create_explanation_text,
+    format_number
 )
 
 
@@ -87,7 +88,7 @@ class MissedSolutionScene(BaseMathScene):
             axes,
             missing_root,
             color=YELLOW,
-            label=f"Missing: x={missing_root:g}"
+            label=f"Missing: x={missing_root:.3f}"
         )
 
         self.play(
@@ -96,8 +97,13 @@ class MissedSolutionScene(BaseMathScene):
 
         self.wait(1)
 
+        formatted_roots = ", ".join(
+            format_number(root)
+            for root in correct_roots
+        )
+
         summary = create_explanation_text(
-            f"Solutions: {correct_roots}"
+            f"Solutions: {formatted_roots}"
         )
 
         self.play(

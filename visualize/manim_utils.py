@@ -304,3 +304,5 @@ def create_period_brace(axes, start_x, period):
     brace_text = brace.get_text(f"Period n * {period}")
 
     return brace, brace_text
+def format_number(value):
+    return f"{value:.3f}".rstrip("0").rstrip(".")

@@ -13,7 +13,7 @@ type AnswerPageProps = {
   onSubmit: (answers: string[]) => void;
 };
 
-export default function AnswerPage({ problem, initialAnswers, errorMessage, onSubmit }: AnswerPageProps) {
+export default function AnswerPage({ problem, initialAnswers, errorMessage, onSubmit}: AnswerPageProps) {
   const [answers, setAnswers] = useState<AnswerEntry[]>(() =>
     initialAnswers.length > 0 ? initialAnswers.map((latex) => createAnswer(latex)) : [createAnswer()],
   );
@@ -23,22 +23,23 @@ export default function AnswerPage({ problem, initialAnswers, errorMessage, onSu
   const filledAnswers = answers.map((answer) => answer.latex).filter((latex) => latex.trim() !== '');
   const hasEmptyBoxes = filledAnswers.some((latex) => latex.includes('\\placeholder'));
   const canCheck = !hasEmptyBoxes;
-
   return (
     <div className="answer-page">
-      <section>
-        <p className="answer-page__instruction">
+
+      <section id="current-problem">
+        <p className="answer-page__instruction" >
           {problem.title} · Solve for {problem.variable}
         </p>
         <MathDisplay latex={problem.equationLatex} className="answer-page__equation" />
       </section>
 
-      <AnswerInput variable={problem.variable} answers={answers} onAnswersChange={setAnswers} />
+      <AnswerInput variable={problem.variable} answers={answers} onAnswersChange={setAnswers}/>
 
       <div className="answer-page__actions">
         {hasEmptyBoxes && <p className="answer-page__hint">Fill in the empty boxes first</p>}
         {errorMessage && <p className="answer-page__error">{errorMessage}</p>}
         <button
+            id="check-answer"
           type="button"
           className="button button--primary answer-page__check"
           disabled={!canCheck}
@@ -46,6 +47,7 @@ export default function AnswerPage({ problem, initialAnswers, errorMessage, onSu
         >
           Check answer
         </button>
+
       </div>
 
     </div>

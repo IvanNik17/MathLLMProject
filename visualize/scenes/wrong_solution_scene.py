@@ -9,7 +9,7 @@ sys.path.append(
 
 
 from scenes.base_math_scene import BaseMathScene
-from visualize.manim_utils import create_root_marker, create_explanation_text
+from visualize.manim_utils import create_root_marker, create_explanation_text, format_number
 
 class WrongSolutionScene(BaseMathScene):
 
@@ -88,7 +88,7 @@ class WrongSolutionScene(BaseMathScene):
 
             wrong_x, y_value = wrong_point
             investigate_text = create_explanation_text(
-                f"Let's check x = {wrong_x:g}"
+                f"Let's check x = {format_number(wrong_x)}"
             )
 
             investigate_text.to_corner(
@@ -129,9 +129,8 @@ class WrongSolutionScene(BaseMathScene):
                 GrowFromCenter(curve_point)
             )
 
-
             value_text = create_explanation_text(
-                f"At x = {wrong_x:g},\ny = {y_value:g}"
+                f"At x = {format_number(wrong_x)},\ny = {format_number(y_value)}"
             )
 
             value_text.next_to(
@@ -165,16 +164,20 @@ class WrongSolutionScene(BaseMathScene):
                     axes,
                     root,
                     color=GREEN,
-                    label=f"Correct: x={root:g}"
+                    label=f"Correct: x={root:.3f}"
                 )
 
                 self.play(
                     GrowFromCenter(correct_marker)
                 )
 
+            formatted_roots = ", ".join(
+                f"{root:.3f}"
+                for root in correct_roots
+            )
 
             summary = create_explanation_text(
-                f"Correct roots: {correct_roots}"
+                f"Correct roots: {formatted_roots}"
             )
 
             summary.to_edge(
