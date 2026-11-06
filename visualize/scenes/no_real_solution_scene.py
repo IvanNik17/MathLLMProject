@@ -123,20 +123,7 @@ class NoRealSolutionScene(BaseMathScene):
         )
 
 
-        gap_text = create_explanation_text(
-            plan.explanation_text
-        )
 
-
-        gap_text.to_edge(
-            DOWN,
-            buff=0.3
-        )
-
-
-        self.play(
-            Write(gap_text)
-        )
 
 
 

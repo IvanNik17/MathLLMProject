@@ -78,20 +78,6 @@ class CorrectAnswerScene(BaseMathScene):
 
 
         print(plan)
-        print("Explanation:", plan.explanation_text)
-
-        explanation = create_explanation_text(
-            plan.explanation_text
-        )
-
-        explanation.to_edge(DOWN)
-
-
-        self.play(
-            Write(explanation)
-        )
-
-        self.wait(2)
 
 
         # ==============================
@@ -106,10 +92,7 @@ class CorrectAnswerScene(BaseMathScene):
 
 
         self.play(
-            Transform(
-                explanation,
-                final_text
-            )
+            Write(final_text)
         )
 
         self.wait(2)

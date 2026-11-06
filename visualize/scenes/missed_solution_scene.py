@@ -90,19 +90,11 @@ class MissedSolutionScene(BaseMathScene):
             label=f"Missing: x={missing_root:g}"
         )
 
-        reveal_text = create_explanation_text(
-            plan.explanation_text
-        )
-
         self.play(
-            GrowFromCenter(missing_marker),
-            Transform(
-                correct_text,
-                reveal_text
-            )
+            GrowFromCenter(missing_marker)
         )
 
-        self.wait(2)
+        self.wait(1)
 
         summary = create_explanation_text(
             f"Solutions: {correct_roots}"
