@@ -74,7 +74,8 @@ class ExplanationPlan:
             "no_real_roots",
             "wrong_period",
             "correct_period",
-            "missing_period"
+            "missing_period",
+            "ai_controlled"
         ]
 
         if self.explanation_type not in valid_types:

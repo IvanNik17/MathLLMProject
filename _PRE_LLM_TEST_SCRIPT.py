@@ -8,10 +8,10 @@ import math_helper.math_problem_parser
 
 print(math_helper.math_problem_parser.__file__)
 
-expression =  "sin(x)"
+expression =  "2*x"
 
-student_answer = "x = 0, 3.14159265358979323"
-student_period = "3 * pi"
+student_answer = "x = 0"
+student_period = ""
 
 llm = LLMExplainer(
         base_url="https://app-mathllm.cloud.sdu.dk/api",
