@@ -105,7 +105,7 @@ class BaseMathScene(Scene):
                 axes,
                 root,
                 color=RED,
-                label=f"Student: x={format_number(root)}"
+                label=f"Student: x={format_number(root)}",
                 elevated=elevated
             )
 
@@ -134,8 +134,8 @@ class BaseMathScene(Scene):
                 axes,
                 root,
                 color=GREEN,
-                label=f"Correct: x={format_number(root)}"
-                elevated=elevated
+                label=f"Correct: x={format_number(root)}",
+                elevated=elevated,
             )
 
             self.play(
