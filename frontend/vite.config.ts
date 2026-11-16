@@ -1,8 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-import { driver } from "driver.js"; // added this one :)
-
 const BACKEND_URL = 'http://localhost:8000';
 
 // https://vite.dev/config/
