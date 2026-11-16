@@ -1,4 +1,4 @@
-import type { AttemptResult, AttemptStatus, Problem } from './types';
+import type { AttemptResult, AttemptStatus, CheckedEquation, Problem } from './types';
 
 const API_BASE = '/api';
 
@@ -41,17 +41,34 @@ export async function fetchProblems(): Promise<Problem[]> {
   return request<Problem[]>('/problems');
 }
 
+/**
+ * Asks the backend whether an equation the student typed can be used as a problem.
+ * If it can't, this throws an Error whose message says why (e.g. "Use x as the only letter").
+ */
+export async function checkCustomProblem(equationLatex: string): Promise<CheckedEquation> {
+  return request<CheckedEquation>('/problems/check', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ equation_latex: equationLatex }),
+  });
+}
+
 /** Sends the student's answers for a problem and waits for the backend's verdict. */
 export async function submitAttempt(
-  problemId: number,
+  problem: Problem,
   answers: string[],
   onProgress?: (status: AttemptStatus) => void,
 ): Promise<AttemptResult> {
+  // The backend knows its own problems by id. It doesn't store the student's own problems, so for those we send the equation itself.
+  const whichProblem = problem.isCustom
+    ? { equation_latex: problem.equationLatex }
+    : { problem_id: problem.id };
+
   let status = await request<AttemptStatus>('/attempts', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      problem_id: problemId,
+      ...whichProblem,
       answers: answers,
     }),
   });

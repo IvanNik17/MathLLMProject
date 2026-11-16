@@ -81,6 +81,22 @@ To check it after editing:
 
     python -m api_communication.problems
 
+### Problems students add themselves
+
+In the web app, "Add your own problem" at the top of the problem list opens a page for typing in an equation.
+
+- The backend decides whether the equation can be used (`check_equation` in `api_communication/problems.py`, reached through `POST /api/problems/check`). The same check is applied to `content/problems.json`.
+- An accepted problem is saved in the student's browser only (localStorage, see `frontend/src/storage/customProblems.ts`). The server keeps no list of them, so no login is needed and students can't see each other's problems. They are lost if the student clears their browser data.
+- When the student answers one, the browser sends the equation itself with the attempt (`equation_latex` instead of `problem_id`), and the backend checks it again.
+
+An equation is refused if the engine can't solve it, if SymPy's `solveset` disagrees with the engine about the solutions, or if it has infinitely many solutions. This keeps periodic equations such as `sin(x) = 0` out until the web app can ask for a period; the place to change it is `_all_real_solutions` in `problems.py`.
+
+The check runs in a separate worker process with a time limit (`api_communication/custom_problems.py`), because some equations keep the solver busy for minutes.
+
+To run the tests for the check:
+
+    python -m pytest tests
+
 
 ## Running the engine without the web app
 

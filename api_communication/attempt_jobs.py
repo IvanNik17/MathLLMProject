@@ -96,7 +96,8 @@ class AttemptRunner:
             await self._pipeline(job)
             log.info(
                 "Attempt %s on problem %s: %s in %.1fs",
-                job.id[:8], job.problem.id, job.result["verdict"], time.time() - started,
+                job.id[:8], "custom" if job.problem.is_custom else job.problem.id,
+                job.result["verdict"], time.time() - started,
             )
         except Exception:
             log.exception("Attempt %s failed", job.id)

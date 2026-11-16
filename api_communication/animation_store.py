@@ -56,6 +56,9 @@ class AnimationStore:
 
     @staticmethod
     def correct_key(problem):
+        if problem.is_custom:
+            # Students' own problems have no id. Two students who type the same equation share one video.
+            return f"custom-{problem.fingerprint()}-v{config.ANIMATION_VERSION}"
         return f"p{problem.id}-{problem.fingerprint()}-v{config.ANIMATION_VERSION}"
 
     def find_correct(self, problem):
@@ -128,12 +131,15 @@ class AnimationStore:
         for video in keep[: max(0, len(keep) - config.MAX_ATTEMPT_VIDEOS)]:
             deleted += _delete(video)
 
-        # 2. Correct-answer videos: those for problems that were edited or removed, then the least recently used beyond the storage limit
+        # 2. Correct-answer videos: those for problems that were edited or removed, then the least recently used beyond the storage limit.
+        # Videos for students' own problems are kept until ANIMATION_VERSION changes or the storage limit pushes them out.
         valid_keys = {self.correct_key(p) for p in current_problems}
+        custom_ending = f"-v{config.ANIMATION_VERSION}"
         infos = sorted(self.correct_dir.glob("*.json"), key=_modified)
         still_valid = []
         for info in infos:
-            if info.stem in valid_keys:
+            is_custom = info.stem.startswith("custom-") and info.stem.endswith(custom_ending)
+            if info.stem in valid_keys or is_custom:
                 still_valid.append(info)
             else:
                 deleted += _delete(info) + _delete(info.with_suffix(".mp4"))

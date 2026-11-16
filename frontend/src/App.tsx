@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchProblems, submitAttempt } from './api/api';
-import type { AttemptResult, AttemptStatus, Problem } from './api/types';
+import type { AttemptResult, AttemptStatus, CheckedEquation, Problem, ProblemId } from './api/types';
 import AppHeader from './components/layout/AppHeader';
 import { GuideButton, MenuButton } from './components/layout/CornerButtons';
 import ProgressSteps from './components/layout/ProgressSteps';
@@ -9,6 +9,8 @@ import StatusMessage from './components/layout/StatusMessage';
 import AnswerPage from './pages/AnswerPage';
 import CheckingPage from './pages/CheckingPage';
 import FeedbackPage from './pages/FeedbackPage';
+import NewProblemPage from './pages/NewProblemPage';
+import { createCustomProblem, loadCustomProblems, saveCustomProblems } from './storage/customProblems';
 import './App.css';
 
 /**
@@ -30,9 +32,17 @@ export default function App() {
   const [tutorialActive, setTutorialActive] = useState(false);
   const [problems, setProblems] = useState<Problem[] | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
+  // The problems the student typed in themselves, read from this browser's storage when the app starts
+  const [customProblems, setCustomProblems] = useState<Problem[]>(loadCustomProblems);
+  // A position in allProblems (see below)
   const [problemIndex, setProblemIndex] = useState(0);
-  const [solvedProblemIds, setSolvedProblemIds] = useState<number[]>([]);
-  const [isProblemListOpen, setIsProblemListOpen] = useState(false);  
+  const [solvedProblemIds, setSolvedProblemIds] = useState<ProblemId[]>([]);
+  const [isProblemListOpen, setIsProblemListOpen] = useState(false);
+  // True while the "Add your own problem" page is showing
+  const [isAddingProblem, setIsAddingProblem] = useState(false);
+
+  // One list for the rest of the app: the backend's problems first, then the student's own
+  const allProblems = [...(problems ?? []), ...customProblems];
 
   // The current attempt at the current problem
   const [phase, setPhase] = useState<Phase>('answering');
@@ -67,7 +77,7 @@ export default function App() {
     setPhase('checking');
 
     try {
-      const attemptResult = await submitAttempt(problem.id, submittedAnswers, setCheckingStatus);
+      const attemptResult = await submitAttempt(problem, submittedAnswers, setCheckingStatus);
       setResult(attemptResult);
       setPhase('feedback');
       // Remember correctly solved problems, for the ticks in the problem list.
@@ -100,9 +110,56 @@ export default function App() {
   }
   
   function handleNextProblem() {
-    if (!problems) return;
+    if (allProblems.length === 0) return;
     // After the last problem, start again from the first
-    selectProblem((problemIndex + 1) % problems.length);
+    selectProblem((problemIndex + 1) % allProblems.length);
+  }
+
+  /** Stores the changed list of the student's own problems, in the app and in the browser. */
+  function updateCustomProblems(changed: Problem[]) {
+    setCustomProblems(changed);
+    saveCustomProblems(changed);
+  }
+
+  function openNewProblemPage() {
+    setIsProblemListOpen(false);
+    setIsAddingProblem(true);
+  }
+
+  /** Called by the new-problem page once the backend has accepted the equation. */
+  function handleAddProblem(equation: CheckedEquation) {
+    setIsAddingProblem(false);
+
+    // If they already have this exact problem, go to it rather than adding it twice
+    const existingIndex = allProblems.findIndex(
+      (problem) => problem.isCustom && problem.equationLatex === equation.equationLatex,
+    );
+    if (existingIndex !== -1) {
+      selectProblem(existingIndex);
+      return;
+    }
+
+    updateCustomProblems([...customProblems, createCustomProblem(equation)]);
+    // The new problem goes last in the list, which is the position the list's current length points at
+    selectProblem(allProblems.length);
+  }
+
+  function handleRemoveProblem(id: ProblemId) {
+    const removedIndex = allProblems.findIndex((problem) => problem.id === id);
+
+    updateCustomProblems(customProblems.filter((problem) => problem.id !== id));
+    setSolvedProblemIds(solvedProblemIds.filter((solvedId) => solvedId !== id));
+
+    if (removedIndex === problemIndex) {
+      // The problem being worked on is gone, so start fresh on the first one. The list stays open.
+      setProblemIndex(0);
+      setAnswers([]);
+      setResult(null);
+      setSubmitError(null);
+    } else if (removedIndex < problemIndex) {
+      // Everything after the removed problem moves up one place, including the current problem
+      setProblemIndex(problemIndex - 1);
+    }
   }
 
 
@@ -120,11 +177,19 @@ export default function App() {
     if (!problems) {
       return <StatusMessage title="Loading problems..." />;
     }
-    if (problems.length === 0) {
-      return <StatusMessage title="There are no problems yet" />;
+    if (isAddingProblem) {
+      return <NewProblemPage onAdd={handleAddProblem} onCancel={() => setIsAddingProblem(false)} />;
+    }
+    if (allProblems.length === 0) {
+      return (
+        <StatusMessage
+          title="There are no problems yet"
+          action={{ label: 'Add your own problem', onClick: openNewProblemPage }}
+        />
+      );
     }
 
-    const problem = problems[problemIndex];
+    const problem = allProblems[problemIndex];
 
     if (phase === 'checking') {
       return <CheckingPage problem={problem} answers={answers} status={checkingStatus} />;
@@ -152,8 +217,9 @@ export default function App() {
     );
   }
 
-  const canUseProblemList = phase === 'answering' && problems !== null && problems.length > 0;
-  
+  const canUseProblemList =
+    phase === 'answering' && !isAddingProblem && problems !== null && allProblems.length > 0;
+
   return (
     <div className="app" inert={tutorialActive}>
       <AppHeader />
@@ -161,19 +227,23 @@ export default function App() {
       {canUseProblemList && (
         <MenuButton isOpen={false} onClick={() => setIsProblemListOpen(true)} />
       )}
-      <GuideButton setTutorialActive={setTutorialActive} />
+      {/* The guide points at parts of the answer page, so it is hidden on the new-problem page */}
+      {!isAddingProblem && <GuideButton setTutorialActive={setTutorialActive} />}
 
 
       <main className="app__content">{renderPage()}</main>
       
-      <ProgressSteps currentStep={STEP_FOR_PHASE[phase]} />
+      {/* Writing a problem isn't one of the Answer / Check / Feedback steps, so they are hidden then */}
+      {!isAddingProblem && <ProgressSteps currentStep={STEP_FOR_PHASE[phase]} />}
 
       {canUseProblemList && isProblemListOpen && (
         <ProblemList
-          problems={problems}
-          currentProblemId={problems[problemIndex].id}
+          problems={allProblems}
+          currentProblemId={allProblems[problemIndex].id}
           solvedProblemIds={solvedProblemIds}
           onSelect={selectProblem}
+          onAddProblem={openNewProblemPage}
+          onRemoveProblem={handleRemoveProblem}
           onClose={() => setIsProblemListOpen(false)}
         />
       )}

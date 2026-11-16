@@ -15,6 +15,11 @@
   --color-accent-soft: rgba(36, 226, 255, 0.25);
   --color-on-accent: #0e1014; /* text placed on top of the accent colour */
 
+  /* Writing your own problem. Deliberately not the accent colour, so that page can't be mistaken for the answer page. */
+  --color-custom: #b9a2ff;
+  --color-custom-glow: rgba(185, 162, 255, 0.35);
+  --color-custom-soft: rgba(185, 162, 255, 0.3);
+
   /* Text */
   --color-text: #ffffff;
   --color-text-muted: rgba(255, 255, 255, 0.7);

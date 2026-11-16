@@ -10,7 +10,8 @@ from pydantic import BaseModel
 from api_communication import config
 from api_communication.animation_store import AnimationStore
 from api_communication.attempt_jobs import AttemptRunner
-from api_communication.problems import ProblemBook
+from api_communication.custom_problems import CustomProblemChecker, ServerBusyError
+from api_communication.problems import MAX_SOLUTIONS, ProblemBook, ProblemError
 from llm.llm_explainer import LLMExplainer
 from math_helper.expression_converter import AnswerFormatError, parse_numeric_answer
 from visualize.manim_renderer import ManimRenderer
@@ -19,13 +20,14 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name
 log = logging.getLogger("api_server")
 
 # Limits on what one request may contain
-MAX_ANSWERS = 10
+MAX_ANSWERS = MAX_SOLUTIONS
 
 
 # These are created when the server starts (see lifespan below)
 problem_book: ProblemBook
 store: AnimationStore
 runner: AttemptRunner
+custom_checker: CustomProblemChecker
 
 
 async def cleanup_loop():
@@ -42,7 +44,7 @@ async def cleanup_loop():
 @asynccontextmanager
 async def lifespan(app):
     """Runs once at startup (before `yield`) and once at shutdown (after `yield`)."""
-    global problem_book, store, runner
+    global problem_book, store, runner, custom_checker
 
     # A broken problems.json stops the server here, with the reason
     problem_book = ProblemBook(config.PROBLEMS_FILE)
@@ -59,12 +61,17 @@ async def lifespan(app):
     )
     runner = AttemptRunner(store, llm, ManimRenderer())
 
+    # Starts the worker process that checks students' own equations. It takes a second or two, so it runs in a thread.
+    custom_checker = CustomProblemChecker()
+    await asyncio.to_thread(custom_checker.start)
+
     cleanup_task = asyncio.create_task(cleanup_loop())
     log.info("Ready: %d problems, data in %s", len(problem_book.all()), config.DATA_DIR)
 
     yield
 
     cleanup_task.cancel()
+    custom_checker.stop()
 
 
 app = FastAPI(lifespan=lifespan)
@@ -72,8 +79,17 @@ app = FastAPI(lifespan=lifespan)
 
 # The data the frontend must send when submitting answers
 class AttemptRequest(BaseModel):
-    problem_id: int
+    # One of these two says which problem the answers are for:
+    # the id of a problem from problems.json...
+    problem_id: int | None = None
+    # ...or the equation of a problem the student typed in themselves
+    equation_latex: str | None = None
     answers: list[str]
+
+
+# The data the frontend must send to have a student's own equation checked
+class ProblemCheckRequest(BaseModel):
+    equation_latex: str
 
 
 @app.get("/api/problems")
@@ -81,12 +97,42 @@ async def get_problems():
     return [problem.to_json() for problem in problem_book.all()]
 
 
+async def read_custom_problem(equation_latex):
+    """The Problem for an equation a student typed in. Replies with an error the frontend can show if it can't be used."""
+    try:
+        return await custom_checker.check(equation_latex)
+    except ProblemError as exc:
+        raise HTTPException(
+            status_code=422,
+            detail={"code": "invalid_problem", "message": str(exc)},
+        )
+    except ServerBusyError:
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "code": "busy",
+                "message": "Lots of users are adding problems right now. Please try again in a minute.",
+            },
+        )
+
+
+@app.post("/api/problems/check")
+async def check_problem(request: ProblemCheckRequest):
+    """Says whether an equation a student typed in can be used as a problem."""
+    problem = await read_custom_problem(request.equation_latex)
+    return problem.to_json()
+
+
 @app.post("/api/attempts", status_code=202)
 async def create_attempt(request: AttemptRequest):
     """Reads the answers and starts checking them. Invalid answers are reported right away; otherwise the reply is the attempt's status, which the frontend then polls (GET /api/attempts/{attempt_id})."""
-    problem = problem_book.get(request.problem_id)
-    if problem is None:
-        raise HTTPException(status_code=404, detail="Problem not found")
+    if request.equation_latex is not None:
+        # Checked again here, because anyone can send anything to this address
+        problem = await read_custom_problem(request.equation_latex)
+    else:
+        problem = problem_book.get(request.problem_id)
+        if problem is None:
+            raise HTTPException(status_code=404, detail="Problem not found")
 
     if not request.answers:
         raise HTTPException(

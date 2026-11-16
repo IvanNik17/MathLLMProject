@@ -45,6 +45,34 @@
   color: var(--color-text-muted);
 }
 
+/* "+ Add your own problem". Violet like the page it opens (see NewProblemPage.css) */
+.problem-list__add {
+  flex-shrink: 0;
+  height: 56px;
+  margin-bottom: 16px;
+  font-size: 18px;
+  color: var(--color-custom);
+  background: none;
+  border: 1px dashed var(--color-custom-soft);
+  border-radius: var(--radius-small);
+}
+
+.problem-list__add:hover {
+  background: var(--color-surface-raised);
+  border-color: var(--color-custom);
+}
+
+/* The heading above the student's own problems */
+.problem-list__subtitle {
+  margin: 20px 0 8px;
+  padding: 0 14px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-custom);
+}
+
 /* The list scrolls if there are more problems than fit */
 .problem-list__items {
   display: flex;
@@ -56,13 +84,37 @@
   list-style: none;
 }
 
-/* One problem row */
+/* One problem row: the problem itself and, for the student's own problems, a remove button beside it */
+
+.problem-list__row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.problem-list__remove {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--color-text-faint);
+  background: none;
+  border: none;
+  border-radius: var(--radius-small);
+}
+
+.problem-list__remove:hover {
+  color: var(--color-text);
+  background: var(--color-surface-hover);
+}
 
 .problem-list__item {
   display: flex;
   align-items: center;
   gap: 20px;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
   min-height: 56px;
   padding: 6px 14px;
   text-align: left;

@@ -39,6 +39,12 @@ MAX_PARALLEL_RENDERS = _int("MATHLLM_MAX_PARALLEL_RENDERS", 2)
 # Calls to the language model mostly wait on the network, so more can overlap.
 MAX_PARALLEL_LLM_CALLS = _int("MATHLLM_MAX_PARALLEL_LLM_CALLS", 6)
 MAX_UNFINISHED_ATTEMPTS = _int("MATHLLM_MAX_UNFINISHED_ATTEMPTS", 40)
+
+# --- Problems students type in themselves -----------------------------------
+# An equation that takes longer than this to check is refused
+PROBLEM_CHECK_SECONDS = _int("MATHLLM_PROBLEM_CHECK_SECONDS", 8)
+# Equations are checked one at a time. With this many already waiting, new ones are told the server is busy.
+MAX_WAITING_PROBLEM_CHECKS = _int("MATHLLM_MAX_WAITING_PROBLEM_CHECKS", 10)
 RENDER_TIMEOUT_SECONDS = _int("MATHLLM_RENDER_TIMEOUT", 300)
 
 # --- Cleaning up ------------------------------------------------------------

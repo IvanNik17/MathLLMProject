@@ -1,7 +1,19 @@
+/** Problems from the backend have a number as their id. Problems the student typed in have text, e.g. "custom-1731772800000". */
+export type ProblemId = number | string;
+
 export type Problem = {
-  id: number;
+  id: ProblemId;
   title: string;
   /** The equation to show, in LaTeX, e.g. "x^{2} - 4 = 0" */
+  equationLatex: string;
+  variable: string;
+  /** True for a problem the student typed in themselves. The backend doesn't store these;, they live in this browser */
+  isCustom?: boolean;
+};
+
+/** What the backend replies when it accepts an equation as a problem (POST /api/problems/check). */
+export type CheckedEquation = {
+  /** The equation, tidied up by the backend */
   equationLatex: string;
   variable: string;
 };
@@ -15,7 +27,8 @@ export type AttemptStage = 'checking_math' | 'writing_feedback' | 'animating';
 /** What the backend says about an attempt while it works on it (GET /api/attempts/<id>). */
 export type AttemptStatus = {
   attempt_id: string;
-  problem_id: number;
+  /** null for a problem the student typed in themselves */
+  problem_id: number | null;
   /** The step it is on now. 'done' and 'failed' mean it has finished. */
   stage: AttemptStage | 'done' | 'failed';
   stages: AttemptStage[];
@@ -27,7 +40,7 @@ export type AttemptStatus = {
 };
 
 export type AttemptResult = {
-  problem_id: number;
+  problem_id: number | null;
   answers: string[];
   student_roots: number[];
   verdict: Verdict;
