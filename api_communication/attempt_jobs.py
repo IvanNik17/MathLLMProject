@@ -125,6 +125,7 @@ class AttemptRunner:
     async def _correct_answer(self, job, plan):
         stored = self.store.find_correct(job.problem)
         if stored:
+            print("DEBUG: Reusing stored correct explanation!", flush=True)
             self._finish(job, plan, stored.explanation_text, stored.video_url, reused=True)
             return
 
@@ -144,7 +145,7 @@ class AttemptRunner:
 
             # The video will be shown to everyone who gets this problem right, so it shows the exact roots rather than how this student wrote them
             plan.student_points = list(plan.correct_points)
-
+            print("DEBUG: Generating new correct explanation with LLM!", flush=True)
             text, is_fallback = await self._write_feedback(job, plan)
 
             def save(mp4):

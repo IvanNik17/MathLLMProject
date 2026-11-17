@@ -1,0 +1,51 @@
+
+.help-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-background);
+}
+
+.help-chat__close {
+  align-self: flex-end;
+  border: none;
+  background: transparent;
+  font-size: 26px;
+  cursor: pointer;
+  color: var(--color-text-muted);
+}
+
+.help-chat__send {
+  align-self: flex-start;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.help-chat__send:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.help-chat__message {
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.help-chat__error {
+  margin: 0;
+  color: var(--color-incorrect);
+}

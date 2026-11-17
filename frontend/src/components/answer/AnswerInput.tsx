@@ -55,7 +55,7 @@ export default function AnswerInput({ variable, answers, onAnswersChange }: Answ
     <div className="answer-card" ref={cardRef}>
       <h2 className="answer-card__title">Your answer</h2>
 
-      <div className="answer-card__rows">
+      <div className="answer-card__rows"id="answer-write">
         {answers.map((answer) => (
           <AnswerRow
             key={answer.id}
