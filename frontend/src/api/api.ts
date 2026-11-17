@@ -84,3 +84,22 @@ export async function submitAttempt(
   }
   return status.result;
 }
+
+/** Response from the AI tutor */
+export type HelpResponse = {
+  response: string;
+};
+
+export async function sendHelpMessage(
+  problem: string,
+  studentAnswer: string,
+): Promise<HelpResponse> {
+  return request<HelpResponse>('/help', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      problem,
+      student_answer: studentAnswer,
+    }),
+  });
+}

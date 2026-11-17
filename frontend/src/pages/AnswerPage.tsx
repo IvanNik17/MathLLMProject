@@ -5,6 +5,7 @@ import MathDisplay from '../components/math/MathDisplay';
 import AnswerInput from '../components/answer/AnswerInput';
 import { createAnswer, type AnswerEntry } from '../components/answer/answerEntry';
 import './AnswerPage.css';
+import HelpChat from '../components/help/HelpChat';
 
 type AnswerPageProps = {
   problem: Problem;
@@ -17,7 +18,7 @@ export default function AnswerPage({ problem, initialAnswers, errorMessage, onSu
   const [answers, setAnswers] = useState<AnswerEntry[]>(() =>
     initialAnswers.length > 0 ? initialAnswers.map((latex) => createAnswer(latex)) : [createAnswer()],
   );
-
+const [isHelpOpen, setIsHelpOpen] = useState(false);
   // Only allow checking once no empty boxes are left (e.g. a fraction with nothing below the line).
   // MathLive writes an empty box as "\placeholder{}" in the LaTeX.
   const filledAnswers = answers.map((answer) => answer.latex).filter((latex) => latex.trim() !== '');
@@ -38,6 +39,15 @@ export default function AnswerPage({ problem, initialAnswers, errorMessage, onSu
       <div className="answer-page__actions">
         {hasEmptyBoxes && <p className="answer-page__hint">Fill in the empty boxes first</p>}
         {errorMessage && <p className="answer-page__error">{errorMessage}</p>}
+
+          <button
+  type="button"
+  className="answer-page__help"
+  onClick={() => setIsHelpOpen((open) => !open)}
+  aria-expanded={isHelpOpen}
+>
+  <span>💡</span> Help
+</button>
         <button
             id="check-answer"
           type="button"
@@ -49,7 +59,18 @@ export default function AnswerPage({ problem, initialAnswers, errorMessage, onSu
         </button>
 
       </div>
-
+ {isHelpOpen && (
+  <HelpChat
+    problem={`${problem.title}: ${problem.equationLatex}`}
+    studentAnswer={answers
+      .map((answer) => answer.latex)
+      .filter(Boolean)
+      .join(', ')}
+    onClose={() => setIsHelpOpen(false)}
+  />
+)}
     </div>
+
   );
+
 }

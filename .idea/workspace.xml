@@ -5,9 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7d8b666-ccf5-4350-8608-be04719b292d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/MathLLMProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MathLLMProject.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/help/HelpChat.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/help/HelpChat.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualize/scenes/base_math_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualize/scenes/base_math_scene.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api_communication/api_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/api_server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api_communication/attempt_jobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/attempt_jobs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/answer/AnswerInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/answer/AnswerInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/math/MathField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/math/MathField.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/AnswerPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/AnswerPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/AnswerPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/AnswerPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/llm/llm_explainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/llm/llm_explainer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,13 +23,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="11030" />
+    <option name="cachedIndexableFilesCount" value="10981" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
         <option value="TypeScript JSX File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -34,61 +43,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.9319863289046262" />
-      <entry key="MS500" value="4.736255560479394" />
-      <entry key="S2" value="10.072799642094703" />
-      <entry key="S5" value="12.663058269382006" />
-      <entry key="S10" value="13.856389774209163" />
-      <entry key="S30" value="24.031295162254168" />
-      <entry key="S60" value="45.981791160103086" />
-      <entry key="M2" value="74.56209011091794" />
-      <entry key="M5" value="125.78471475994041" />
-      <entry key="M10" value="184.68078305645884" />
-      <entry key="M15" value="226.68790273129295" />
-      <entry key="M30" value="327.37345260829505" />
-      <entry key="H1" value="514.6947543134771" />
-      <entry key="H2" value="841.1082969310739" />
-      <entry key="H4" value="1259.7774470883935" />
-      <entry key="D1" value="1991.8190315075742" />
-      <entry key="W1" value="2181.8014164741576" />
+      <entry key="MS100" value="1.1309791968633758" />
+      <entry key="MS500" value="3.1898168468764134" />
+      <entry key="S2" value="7.406414627322023" />
+      <entry key="S5" value="10.02317876576927" />
+      <entry key="S10" value="12.07647045242918" />
+      <entry key="S30" value="15.15256487149025" />
+      <entry key="S60" value="16.41456293251988" />
+      <entry key="M2" value="17.1616818275194" />
+      <entry key="M5" value="17.91916842398841" />
+      <entry key="M10" value="21.772848735270973" />
+      <entry key="M15" value="29.738037464353656" />
+      <entry key="M30" value="74.24462703973506" />
+      <entry key="H1" value="218.62054857833465" />
+      <entry key="H2" value="545.3048774312093" />
+      <entry key="H4" value="1042.5589428346138" />
+      <entry key="D1" value="2067.679132382238" />
+      <entry key="W1" value="2360.294335278531" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
       <entry key="MS500" value="0.0" />
-      <entry key="S2" value="1.3730004712872956E-99" />
-      <entry key="S5" value="2.9640733094944562E-40" />
-      <entry key="S10" value="2.0246371809440382E-20" />
-      <entry key="S30" value="4.1422920480280676E-7" />
-      <entry key="S60" value="0.0010280959162455433" />
-      <entry key="M2" value="0.06342517286789169" />
-      <entry key="M5" value="1.0411623727866341" />
-      <entry key="M10" value="3.2229682203910515" />
-      <entry key="M15" value="5.176716737757639" />
-      <entry key="M30" value="10.761026667095395" />
-      <entry key="H1" value="21.444555335728456" />
-      <entry key="H2" value="36.453624428352704" />
-      <entry key="H4" value="51.878627232341415" />
-      <entry key="D1" value="75.2411403804217" />
-      <entry key="W1" value="80.97613691930478" />
+      <entry key="S2" value="1.6524282523569327E-255" />
+      <entry key="S5" value="1.894697912875086E-102" />
+      <entry key="S10" value="2.1843833354034455E-51" />
+      <entry key="S30" value="2.6450795611614037E-17" />
+      <entry key="S60" value="9.490543640313548E-9" />
+      <entry key="M2" value="1.9901160601536394E-4" />
+      <entry key="M5" value="0.0863393201620523" />
+      <entry key="M10" value="0.6949526592527713" />
+      <entry key="M15" value="1.4663682900446917" />
+      <entry key="M30" value="4.128965461939743" />
+      <entry key="H1" value="11.642293127567278" />
+      <entry key="H2" value="27.40688121556397" />
+      <entry key="H4" value="48.16522145830096" />
+      <entry key="D1" value="85.29763805033376" />
+      <entry key="W1" value="95.20331317972925" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.8965556628172042" />
-      <entry key="MS500" value="4.665663628000208" />
-      <entry key="S2" value="10.000548549851013" />
-      <entry key="S5" value="12.623951530381719" />
-      <entry key="S10" value="13.834714796309374" />
-      <entry key="S30" value="24.022195540802368" />
-      <entry key="S60" value="45.973923460433035" />
-      <entry key="M2" value="74.6135900447581" />
-      <entry key="M5" value="126.80439747346355" />
-      <entry key="M10" value="187.87842611046364" />
-      <entry key="M15" value="231.83974928960038" />
-      <entry key="M30" value="338.11060002628057" />
-      <entry key="H1" value="536.116110307665" />
-      <entry key="H2" value="877.5417585467445" />
-      <entry key="H4" value="1311.641125741823" />
-      <entry key="D1" value="2067.056342568624" />
-      <entry key="W1" value="2262.7769574849153" />
+      <entry key="MS100" value="0.3491685549861915" />
+      <entry key="MS500" value="2.8324031003793726" />
+      <entry key="S2" value="7.058862083498269" />
+      <entry key="S5" value="9.796017674923338" />
+      <entry key="S10" value="11.935693407389113" />
+      <entry key="S30" value="15.09416732373438" />
+      <entry key="S60" value="16.383074579336956" />
+      <entry key="M2" value="17.145455042609555" />
+      <entry key="M5" value="17.99834566258889" />
+      <entry key="M10" value="22.46262256173233" />
+      <entry key="M15" value="31.199329594789567" />
+      <entry key="M30" value="78.3672330150089" />
+      <entry key="H1" value="230.2529868432208" />
+      <entry key="H2" value="572.6988809892698" />
+      <entry key="H4" value="1090.7118911544228" />
+      <entry key="D1" value="2152.972803935779" />
+      <entry key="W1" value="2455.497004771992" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -117,6 +126,7 @@
     &quot;git-widget-placeholder&quot;: &quot;deploy&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Alexander/Desktop/MathLLMProject/frontend/src/components/layout&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -211,7 +221,17 @@
       <workItem from="1793971034607" duration="1428000" />
       <workItem from="1794137346863" duration="782000" />
       <workItem from="1794138801585" duration="213000" />
-      <workItem from="1794139023225" duration="1547000" />
+      <workItem from="1794139023225" duration="4329000" />
+      <workItem from="1794229701901" duration="5061000" />
+      <workItem from="1794299533579" duration="1920000" />
+      <workItem from="1794304194236" duration="13000" />
+      <workItem from="1794503665650" duration="2881000" />
+      <workItem from="1794570673404" duration="8000" />
+      <workItem from="1794588670704" duration="1544000" />
+      <workItem from="1794649162915" duration="2634000" />
+      <workItem from="1794654877535" duration="1563000" />
+      <workItem from="1794851735662" duration="3741000" />
+      <workItem from="1794923763164" duration="1384000" />
     </task>
     <servers />
   </component>
@@ -219,6 +239,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MathLLMProject$latex_to_sympy.coverage" NAME="latex_to_sympy Coverage Results" MODIFIED="1792776819030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/MathLLMProject$latex_to_sympy.coverage" NAME="latex_to_sympy Coverage Results" MODIFIED="1794505088138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
 </project>

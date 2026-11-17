@@ -29,6 +29,7 @@ store: AnimationStore
 runner: AttemptRunner
 custom_checker: CustomProblemChecker
 
+llm: LLMExplainer
 
 async def cleanup_loop():
     """Deletes old videos every few minutes, for as long as the server runs."""
@@ -44,7 +45,7 @@ async def cleanup_loop():
 @asynccontextmanager
 async def lifespan(app):
     """Runs once at startup (before `yield`) and once at shutdown (after `yield`)."""
-    global problem_book, store, runner, custom_checker
+    global problem_book, store, runner, custom_checker, llm
 
     # A broken problems.json stops the server here, with the reason
     problem_book = ProblemBook(config.PROBLEMS_FILE)
@@ -86,6 +87,9 @@ class AttemptRequest(BaseModel):
     equation_latex: str | None = None
     answers: list[str]
 
+class HelpRequest(BaseModel):
+    problem: str
+    student_answer: str = ""
 
 # The data the frontend must send to have a student's own equation checked
 class ProblemCheckRequest(BaseModel):
@@ -195,7 +199,23 @@ async def get_video(kind: str, filename: str):
         raise HTTPException(status_code=404, detail="Video not found")
     return FileResponse(path=path, media_type="video/mp4")
 
+@app.post("/api/help")
+async def get_help(request: HelpRequest):
+    try:
+        response = await asyncio.to_thread(
+            llm.generate_hint,
+            request.problem,
+            request.student_answer
+        )
 
+        return {"response": response}
+
+    except Exception:
+        log.exception("Failed to generate help")
+        raise HTTPException(
+            status_code=500,
+            detail="Could not generate help."
+        )
 @app.get("/api/health")
 async def health():
     return {
@@ -226,3 +246,4 @@ if (config.FRONTEND_DIST / "index.html").exists():
     app.mount("/", FrontendFiles(directory=config.FRONTEND_DIST, html=True), name="frontend")
 else:
     log.info("No built frontend at %s; serving the API only (use `npm run dev` for the frontend)", config.FRONTEND_DIST)
+
