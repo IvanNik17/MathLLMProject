@@ -5,17 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7d8b666-ccf5-4350-8608-be04719b292d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/help/HelpChat.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/help/HelpChat.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api_communication/api_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/api_server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api_communication/attempt_jobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/api_communication/attempt_jobs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/answer/AnswerInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/answer/AnswerInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/math/MathField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/math/MathField.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/AnswerPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/AnswerPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/AnswerPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/AnswerPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/llm/llm_explainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/llm/llm_explainer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/problems.json" beforeDir="false" afterPath="$PROJECT_DIR$/content/problems.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="10981" />
+    <option name="cachedIndexableFilesCount" value="10987" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -232,6 +223,7 @@
       <workItem from="1794654877535" duration="1563000" />
       <workItem from="1794851735662" duration="3741000" />
       <workItem from="1794923763164" duration="1384000" />
+      <workItem from="1795438770617" duration="986000" />
     </task>
     <servers />
   </component>

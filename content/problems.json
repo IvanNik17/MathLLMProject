@@ -8,13 +8,13 @@
   {
     "id": 2,
     "title": "Problem 2",
-    "equationLatex": "x^{4} - 2 = 0",
+    "equationLatex": "x^{2} + 3x - 10 = 0",
     "variable": "x"
   },
   {
     "id": 3,
     "title": "Problem 3",
-    "equationLatex": "x^{5} - 2 = 0",
+    "equationLatex": "2x^{2} + 4x - 6 = 0",
     "variable": "x"
   }
 ]
