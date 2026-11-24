@@ -60,6 +60,33 @@
   background: var(--color-surface-hover);
 }
 
+/* --- Shown when every row has been removed: the answer is "no real solutions" --- */
+
+.answer-card__no-roots {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  min-height: 90px;
+  padding: 16px 28px;
+  background: var(--color-surface-sunken);
+  border: 1px solid var(--color-accent-soft);
+  border-radius: var(--radius-medium);
+}
+
+.answer-card__no-roots-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.answer-card__no-roots-text {
+  margin: 0;
+  font-size: 16px;
+  color: var(--color-text-muted);
+}
+
 /* --- "+ Add a solution" --- */
 
 .answer-card__add {

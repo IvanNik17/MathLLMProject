@@ -99,6 +99,21 @@ class MathProblemParser:
 
         if len(correct_roots) == 0:
 
+            # The student answered "no real solutions", which is right
+            if len(student_roots) == 0:
+                return ExplanationPlan(
+                    explanation_type="correct_no_roots",
+                    expression=expression,
+                    correct_points=[],
+                    student_points=[],
+                    steps=[
+                        "show_graph",
+                        "show_no_intersections",
+                        "celebrate_solution"
+                    ],
+                    explanation_text="Correct, the graph never crosses the x-axis, so there are no real solutions."
+                )
+
             return ExplanationPlan(
                 explanation_type="no_real_roots",
                 expression=expression,

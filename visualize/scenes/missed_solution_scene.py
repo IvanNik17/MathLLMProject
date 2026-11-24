@@ -56,7 +56,9 @@ class MissedSolutionScene(BaseMathScene):
 
         count = len(plan.student_points)
 
-        if count == 1:
+        if count == 0:
+            message = "You answered that there are no solutions."
+        elif count == 1:
             message = "Correct! One solution has been found."
         else:
             message = f"Correct! {count} solutions have been found."
@@ -72,7 +74,7 @@ class MissedSolutionScene(BaseMathScene):
         self.wait(1)
 
         question = create_explanation_text(
-            "Is there another solution?"
+            "Does the graph cross the x-axis?" if count == 0 else "Is there another solution?"
         )
 
         self.play(

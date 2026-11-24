@@ -113,7 +113,7 @@ class AttemptRunner:
             MathProblemParser.parse, job.problem.expression, job.student_roots
         )
 
-        if plan.explanation_type == "correct":
+        if plan.explanation_type in ("correct", "correct_no_roots"):
             await self._correct_answer(job, plan)
             return
 

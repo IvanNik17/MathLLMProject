@@ -23,7 +23,11 @@ const [isHelpOpen, setIsHelpOpen] = useState(false);
   // MathLive writes an empty box as "\placeholder{}" in the LaTeX.
   const filledAnswers = answers.map((answer) => answer.latex).filter((latex) => latex.trim() !== '');
   const hasEmptyBoxes = filledAnswers.some((latex) => latex.includes('\\placeholder'));
-  const canCheck = !hasEmptyBoxes;
+  // Removing every row means "no real solutions" and sends an empty list.
+  // Rows that are all left blank are not the same thing, so they can't be checked.
+  const answersNoRoots = answers.length === 0;
+  const onlyBlankRows = !answersNoRoots && filledAnswers.length === 0;
+  const canCheck = !hasEmptyBoxes && !onlyBlankRows;
   return (
     <div className="answer-page">
 
@@ -38,6 +42,11 @@ const [isHelpOpen, setIsHelpOpen] = useState(false);
 
       <div className="answer-page__actions">
         {hasEmptyBoxes && <p className="answer-page__hint">Fill in the empty boxes first</p>}
+        {onlyBlankRows && (
+          <p className="answer-page__hint">
+            Type a solution, or remove the row if there are no solutions
+          </p>
+        )}
         {errorMessage && <p className="answer-page__error">{errorMessage}</p>}
 
           <button
@@ -62,10 +71,14 @@ const [isHelpOpen, setIsHelpOpen] = useState(false);
  {isHelpOpen && (
   <HelpChat
     problem={`${problem.title}: ${problem.equationLatex}`}
-    studentAnswer={answers
-      .map((answer) => answer.latex)
-      .filter(Boolean)
-      .join(', ')}
+    studentAnswer={
+      answersNoRoots
+        ? 'No real solutions'
+        : answers
+            .map((answer) => answer.latex)
+            .filter(Boolean)
+            .join(', ')
+    }
     onClose={() => setIsHelpOpen(false)}
   />
 )}

@@ -19,7 +19,13 @@ export type CheckedEquation = {
 };
 
 /** The engine's judgement of an attempt. The backend calls this explanation_type. */
-export type Verdict = 'correct' | 'missed_root' | 'extra_root' | 'wrong_root' | 'no_real_roots';
+export type Verdict =
+  | 'correct'
+  | 'correct_no_roots'
+  | 'missed_root'
+  | 'extra_root'
+  | 'wrong_root'
+  | 'no_real_roots';
 
 /** The steps the backend works through for each attempt, in order. */
 export type AttemptStage = 'checking_math' | 'writing_feedback' | 'animating';

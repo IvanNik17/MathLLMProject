@@ -30,7 +30,7 @@ class NoRealSolutionScene(BaseMathScene):
 
         self.validate_plan(
             plan,
-            "no_real_roots"
+            ("no_real_roots", "correct_no_roots")
         )
 
 

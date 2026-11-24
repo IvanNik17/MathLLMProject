@@ -15,9 +15,21 @@ const VERDICT_DISPLAYS: Record<Verdict, VerdictDisplay> = {
   extra_root: { title: 'Partly correct', subtitle: "One of your answers isn't a solution", tone: 'partial' },
   wrong_root: { title: 'Not quite', subtitle: "Your answer isn't a solution", tone: 'incorrect' },
   no_real_roots: { title: 'Not quite', subtitle: 'This equation has no real solutions', tone: 'incorrect' },
+  correct_no_roots: { title: 'Correct', subtitle: 'This equation has no real solutions', tone: 'correct' },
 };
 
-export function getVerdictDisplay(verdict: string): VerdictDisplay {
+/** Shown instead of missed_root when the student answered "no real solutions" but there are some */
+const NO_ANSWER_MISSED: VerdictDisplay = {
+  title: 'Not quite',
+  subtitle: 'This equation does have real solutions',
+  tone: 'incorrect',
+};
+
+/** `answeredNoRoots` is true when the student submitted no solutions, i.e. said there are none. */
+export function getVerdictDisplay(verdict: string, answeredNoRoots = false): VerdictDisplay {
+  // The backend calls this missed_root, but "partly correct" would be wrong when nothing was found
+  if (verdict === 'missed_root' && answeredNoRoots) return NO_ANSWER_MISSED;
+
   return (
     VERDICT_DISPLAYS[verdict as Verdict] ?? { title: 'Checked', subtitle: verdict, tone: 'partial' }
   );

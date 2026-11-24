@@ -253,7 +253,9 @@ class BaseMathScene(Scene):
         plan,
         expected_type
     ):
-        if plan.explanation_type != expected_type:
+        # expected_type can be one type, or a tuple of types the scene can show
+        expected = (expected_type,) if isinstance(expected_type, str) else tuple(expected_type)
+        if plan.explanation_type not in expected:
             raise ValueError(
-                f"Expected {expected_type}"
+                f"Expected {' or '.join(expected)}"
             )

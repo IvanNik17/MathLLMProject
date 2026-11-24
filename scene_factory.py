@@ -36,7 +36,7 @@ class SceneFactory:
 
             return ExtraSolutionScene
         
-        elif plan.explanation_type == "no_real_roots":
+        elif plan.explanation_type in ("no_real_roots", "correct_no_roots"):
 
             NoRealSolutionScene.PLAN = plan
 

@@ -56,6 +56,16 @@ export default function AnswerInput({ variable, answers, onAnswersChange }: Answ
       <h2 className="answer-card__title">Your answer</h2>
 
       <div className="answer-card__rows"id="answer-write">
+        {answers.length === 0 && (
+          // Removing every row is how a student answers that there are no solutions
+          <div className="answer-card__no-roots" role="status">
+            <p className="answer-card__no-roots-title">No real solutions</p>
+            <p className="answer-card__no-roots-text">
+              You're answering that this equation has no real solutions. To enter a solution
+              instead, use "+ Add a solution".
+            </p>
+          </div>
+        )}
         {answers.map((answer) => (
           <AnswerRow
             key={answer.id}

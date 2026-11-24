@@ -72,6 +72,7 @@ class ExplanationPlan:
             "correct",
             "extra_root",
             "no_real_roots",
+            "correct_no_roots",
             "wrong_period",
             "correct_period",
             "missing_period"
@@ -138,7 +139,7 @@ class ExplanationPlan:
             )
 
 
-        if (len(self.correct_points) == 0 and self.explanation_type != "no_real_roots"):
+        if (len(self.correct_points) == 0 and self.explanation_type not in ("no_real_roots", "correct_no_roots")):
 
             raise ValueError(
                 "correct_points cannot be empty"

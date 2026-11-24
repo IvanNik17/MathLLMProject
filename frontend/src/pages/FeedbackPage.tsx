@@ -41,6 +41,7 @@ export default function FeedbackPage({ problem, answers, result, onTryAgain, onN
 
         <VerdictCard
           verdict={result.verdict}
+          answeredNoRoots={result.student_roots.length === 0}
           explanation={result.explanation_text}
           onTryAgain={onTryAgain}
           onNextProblem={onNextProblem}

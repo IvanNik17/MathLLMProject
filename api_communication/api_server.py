@@ -138,11 +138,7 @@ async def create_attempt(request: AttemptRequest):
         if problem is None:
             raise HTTPException(status_code=404, detail="Problem not found")
 
-    if not request.answers:
-        raise HTTPException(
-            status_code=422,
-            detail={"code": "invalid_answers", "message": "Enter at least one solution."},
-        )
+    # An empty list is a valid answer: the student is saying the equation has no real solutions.
     if len(request.answers) > MAX_ANSWERS:
         raise HTTPException(
             status_code=422,

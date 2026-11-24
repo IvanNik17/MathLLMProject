@@ -3,6 +3,8 @@ import './VerdictCard.css';
 
 type VerdictCardProps = {
   verdict: string;
+  /** True when the student submitted no solutions, i.e. answered "no real solutions" */
+  answeredNoRoots: boolean;
   explanation: string;
   onTryAgain: () => void;
   onNextProblem: () => void;
@@ -11,8 +13,8 @@ type VerdictCardProps = {
 const TONE_ICONS = { correct: '✓', partial: '–', incorrect: '✕' };
 
 /** The card beside the video; verdict, written feedback, retry/next buttons */
-export default function VerdictCard({ verdict, explanation, onTryAgain, onNextProblem }: VerdictCardProps) {
-  const display = getVerdictDisplay(verdict);
+export default function VerdictCard({ verdict, answeredNoRoots, explanation, onTryAgain, onNextProblem }: VerdictCardProps) {
+  const display = getVerdictDisplay(verdict, answeredNoRoots);
 
   return (
     <section className={`verdict-card verdict-card--${display.tone}`}>

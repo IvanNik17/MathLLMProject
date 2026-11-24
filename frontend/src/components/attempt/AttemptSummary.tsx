@@ -9,7 +9,11 @@ type AttemptSummaryProps = {
 };
 
 export default function AttemptSummary({ problem, answers, layout }: AttemptSummaryProps) {
-  const answerLatex = `${problem.variable} = ${answers.join(',\\ ')}`;
+  // No answers means the student said the equation has no real solutions
+  const answerLatex =
+    answers.length === 0
+      ? '\\text{No real solutions}'
+      : `${problem.variable} = ${answers.join(',\\ ')}`;
 
   return (
     <div className={`attempt-summary attempt-summary--${layout}`}>

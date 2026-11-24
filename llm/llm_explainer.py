@@ -76,6 +76,8 @@ The explanation must:
 
 ADAPT TO THE DATA:
 - If wrong_roots, missing_roots, and extra_points are all empty, and the student solutions match the correct solutions, explicitly state that the student's answer is correct and complete.
+- If the student solutions list is empty, the student deliberately answered that the equation has no real solutions.
+- If the explanation type is correct_no_roots, the student correctly answered that the equation has no real solutions; tell them they are correct.
 - If some solutions are correct and others are wrong or missing, explain the distinction clearly.
 - If the student has incorrect or extra solutions, identify the relevant inconsistent data using the supplied data.
 - Do not tell the student they are correct when they give incorrect answers.

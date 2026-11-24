@@ -81,7 +81,8 @@ export default function App() {
       setResult(attemptResult);
       setPhase('feedback');
       // Remember correctly solved problems, for the ticks in the problem list.
-      if (attemptResult.verdict === 'correct' && !solvedProblemIds.includes(problem.id)) {
+      const isCorrect = attemptResult.verdict === 'correct' || attemptResult.verdict === 'correct_no_roots';
+      if (isCorrect && !solvedProblemIds.includes(problem.id)) {
         setSolvedProblemIds([...solvedProblemIds, problem.id]);
       }
     } catch (error) {
